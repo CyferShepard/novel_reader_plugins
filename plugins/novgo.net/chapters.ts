@@ -6,7 +6,7 @@ const chapters: ScraperPayload = new ScraperPayload({
   query: [
     new ScraperQuery({
       label: "chapters",
-      element: "li",
+      element: "ul.list-chapter>li",
       subQuery: [
         new ScraperQuery({ label: "url", element: "a", withHref: true }),
         new ScraperQuery({ label: "title", element: "a", dataProp: "title" }),

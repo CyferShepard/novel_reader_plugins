@@ -3,7 +3,7 @@
   "query": [
     {
       "label": "chapters",
-      "element": "li",
+      "element": "ul.list-chapter>li",
       "getContent": true,
       "withHref": false,
       "subQuery": [

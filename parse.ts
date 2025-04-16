@@ -14,7 +14,7 @@ function substitute(template: string, ...values: string[]): string {
 if (import.meta.main) {
   const specificConfig: ScraperPayload | undefined = chapters;
   if (specificConfig !== undefined) {
-    specificConfig.url = substitute(specificConfig.url, "/cultivation-online-novel.html", "1");
+    specificConfig.url = substitute(specificConfig.url, "/cultivation-online-novel.html", "2");
     const scraperParser = new ScraperParser();
 
     scraperParser.parseQuery(specificConfig).then((response) => {
