@@ -1,5 +1,5 @@
 {
-  "url": "https://novelbuddy.io/novel${0}${1}",
+  "url": "https://novelbuddy.io/novel${0}",
   "query": [
     {
       "label": "novel_title",
