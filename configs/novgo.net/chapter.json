@@ -1,5 +1,5 @@
 {
-  "url": "https://novgo.net${0}${1}",
+  "url": "https://novgo.net${0}",
   "query": [
     {
       "label": "novel_title",
