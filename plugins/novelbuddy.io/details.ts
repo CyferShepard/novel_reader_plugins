@@ -8,11 +8,6 @@ const details: ScraperPayload = new ScraperPayload({
     new ScraperQuery({ label: "summary", element: ".summary>p" }),
     new ScraperQuery({ label: "tags", element: ".tags>a" }),
     new ScraperQuery({
-      label: "details",
-      element: ".detail>.meta.box>p",
-      subQuery: [new ScraperQuery({ label: "field", element: "strong" }), new ScraperQuery({ label: "value", element: "span" })],
-    }),
-    new ScraperQuery({
       label: "Authors",
       element: ".detail>.meta.box>p>span",
       selectItemsAtIndex: [0],
@@ -24,7 +19,7 @@ const details: ScraperPayload = new ScraperPayload({
     }),
     new ScraperQuery({
       label: "Genres",
-      element: ".detail>.meta.box>p>span",
+      element: ".detail>.meta.box>p>a",
       selectItemsAtIndex: [2],
     }),
     new ScraperQuery({
