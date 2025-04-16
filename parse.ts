@@ -1,6 +1,6 @@
 import { ScraperParser } from "./classes/api-parser.ts";
 import ScraperPayload from "./models/ScraperPayload.ts";
-import chapters from "./plugins/novago.net/chapters.ts";
+import chapters from "./plugins/novgo.net/chapters.ts";
 
 export function add(a: number, b: number): number {
   return a + b;
