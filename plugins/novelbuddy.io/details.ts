@@ -2,13 +2,13 @@ import ScraperPayload from "../../models/ScraperPayload.ts";
 import ScraperQuery from "../../models/ScraperQuery.ts";
 
 const details: ScraperPayload = new ScraperPayload({
-  url: "https://novelbuddy.io/novel/${0}",
+  url: "https://novelbuddy.io/novel${0}",
   query: [
     new ScraperQuery({ label: "title", element: ".detail>.name.box>h1" }),
     new ScraperQuery({ label: "summary", element: ".summary>p" }),
     new ScraperQuery({ label: "tags", element: ".tags>a" }),
     new ScraperQuery({
-      label: "Authors",
+      label: "Author",
       element: ".detail>.meta.box>p>a>span",
       selectItemsAtIndex: [0],
     }),

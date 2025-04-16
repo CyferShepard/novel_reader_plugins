@@ -1,43 +1,43 @@
 {
-  "url": "https://novelbuddy.io/search?q=${0}",
+  "url": "https://novgo.net/search?keyword=${0}",
   "query": [
     {
       "label": "results",
-      "element": ".book-item",
+      "element": ".row",
       "getContent": true,
       "withHref": false,
       "subQuery": [
         {
           "label": "url",
-          "element": ".meta>.title>h3>a",
+          "element": ".truyen-title>a",
           "getContent": true,
           "withHref": true,
           "selectItemsAtIndex": []
         },
         {
           "label": "title",
-          "element": ".meta>.title>h3>a",
+          "element": ".truyen-title>a",
           "getContent": true,
           "withHref": false,
           "selectItemsAtIndex": []
         },
         {
           "label": "summary",
-          "element": ".meta>.summary>p",
+          "element": "",
           "getContent": true,
           "withHref": false,
           "selectItemsAtIndex": []
         },
         {
           "label": "cover",
-          "element": ".book-detailed-item>.thumb>a>img",
+          "element": "img",
           "getContent": true,
           "withHref": true,
           "selectItemsAtIndex": []
         },
         {
           "label": "genres",
-          "element": ".meta>.genres>span",
+          "element": "",
           "getContent": true,
           "withHref": false,
           "selectItemsAtIndex": []

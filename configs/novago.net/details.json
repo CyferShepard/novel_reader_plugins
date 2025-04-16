@@ -1,0 +1,55 @@
+{
+  "url": "https://novgo.net${0}",
+  "query": [
+    {
+      "label": "title",
+      "element": ".title",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "summary",
+      "element": ".desc-text>p",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "Author",
+      "element": ".info>div>a",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        0
+      ]
+    },
+    {
+      "label": "Status",
+      "element": ".info>div",
+      "getContent": true,
+      "withHref": false,
+      "subQuery": [
+        {
+          "label": "Status",
+          "element": "a",
+          "getContent": true,
+          "withHref": false,
+          "selectItemsAtIndex": []
+        }
+      ],
+      "selectItemsAtIndex": [
+        3
+      ]
+    },
+    {
+      "label": "Genres",
+      "element": ".info>div",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        1
+      ]
+    }
+  ]
+}

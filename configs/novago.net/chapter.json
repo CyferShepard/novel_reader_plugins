@@ -1,30 +1,32 @@
 {
-  "url": "https://novelbuddy.io/novel${0}${1}",
+  "url": "https://novgo.net${0}${1}",
   "query": [
     {
       "label": "novel_title",
-      "element": ".chapter-info>h2>a",
+      "element": ".truyen-title",
       "getContent": true,
       "withHref": false,
+      "dataProp": "title",
       "selectItemsAtIndex": []
     },
     {
       "label": "novel_url",
-      "element": ".chapter-info>h2>a",
+      "element": ".truyen-title",
       "getContent": true,
       "withHref": true,
       "selectItemsAtIndex": []
     },
     {
       "label": "chapter_title",
-      "element": "#chapter__content>h1",
+      "element": ".chapter-title",
       "getContent": true,
       "withHref": false,
+      "dataProp": "title",
       "selectItemsAtIndex": []
     },
     {
       "label": "chapter",
-      "element": ".content-inner>p",
+      "element": "#chapter-content",
       "getContent": true,
       "withHref": false,
       "selectItemsAtIndex": []

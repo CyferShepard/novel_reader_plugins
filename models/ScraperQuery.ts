@@ -3,6 +3,7 @@ class ScraperQuery {
   element: string;
   getContent: boolean;
   withHref: boolean;
+  dataProp?: string;
   subQuery?: ScraperQuery[];
   selectItemsAtIndex: number[];
 
@@ -11,6 +12,7 @@ class ScraperQuery {
     element,
     getContent = true,
     withHref = false,
+    dataProp,
     subQuery,
     selectItemsAtIndex,
   }: {
@@ -18,6 +20,7 @@ class ScraperQuery {
     element: string;
     getContent?: boolean;
     withHref?: boolean;
+    dataProp?: string;
     subQuery?: ScraperQuery[];
     selectItemsAtIndex?: number[];
   }) {
@@ -25,6 +28,7 @@ class ScraperQuery {
     this.element = element;
     this.getContent = getContent;
     this.withHref = withHref;
+    this.dataProp = dataProp;
     this.subQuery = subQuery;
     this.selectItemsAtIndex = selectItemsAtIndex ?? [];
   }
@@ -35,6 +39,7 @@ class ScraperQuery {
       element: json["element"] as string,
       getContent: json["getContent"] as boolean,
       withHref: json["withHref"] as boolean,
+      dataProp: json["dataProp"] as string,
       subQuery: (json["subQuery"] as Array<Record<string, unknown>>)?.map((e) => ScraperQuery.fromJson(e)) ?? [],
       selectItemsAtIndex: (json["selectItemsAtIndex"] as Array<number>) ?? [],
     });
@@ -46,6 +51,7 @@ class ScraperQuery {
       element: this.element,
       getContent: this.getContent,
       withHref: this.withHref,
+      dataProp: this.dataProp,
       subQuery: this.subQuery?.map((e) => e.toJson()),
       selectItemsAtIndex: this.selectItemsAtIndex ?? [],
     };

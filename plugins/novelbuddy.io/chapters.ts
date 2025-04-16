@@ -2,7 +2,7 @@ import ScraperPayload from "../../models/ScraperPayload.ts";
 import ScraperQuery from "../../models/ScraperQuery.ts";
 
 const chapters: ScraperPayload = new ScraperPayload({
-  url: "https://novelbuddy.io/api/manga/${0}/chapters?source=detail",
+  url: "https://novelbuddy.io/api/manga${0}/chapters?source=detail",
   query: [
     new ScraperQuery({
       label: "chapters",
@@ -13,6 +13,8 @@ const chapters: ScraperPayload = new ScraperPayload({
         new ScraperQuery({ label: "date", element: ".chapter-update" }),
       ],
     }),
+    // new ScraperQuery({ label: "CurentPage", element: ".pagination>li.active>a", dataProp: "data-page" }),
+    // new ScraperQuery({ label: "LastPage", element: ".last>a", dataProp: "data-page" }),
   ],
 });
 

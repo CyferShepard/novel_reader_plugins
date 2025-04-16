@@ -1,5 +1,5 @@
 {
-  "url": "https://novelbuddy.io/api/manga${0}/chapters?source=detail",
+  "url": "https://novgo.net${0}?page=${1}",
   "query": [
     {
       "label": "chapters",
@@ -16,19 +16,29 @@
         },
         {
           "label": "title",
-          "element": ".chapter-title",
+          "element": "a",
           "getContent": true,
           "withHref": false,
-          "selectItemsAtIndex": []
-        },
-        {
-          "label": "date",
-          "element": ".chapter-update",
-          "getContent": true,
-          "withHref": false,
+          "dataProp": "title",
           "selectItemsAtIndex": []
         }
       ],
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "CurentPage",
+      "element": ".pagination>li.active>a",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "data-page",
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "LastPage",
+      "element": ".last>a",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "data-page",
       "selectItemsAtIndex": []
     }
   ]
