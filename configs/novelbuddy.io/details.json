@@ -1,0 +1,94 @@
+{
+  "url": "https://novelbuddy.io/novel/${0}",
+  "query": [
+    {
+      "label": "title",
+      "element": ".detail>.name.box>h1",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "summary",
+      "element": ".summary>p",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "tags",
+      "element": ".tags>a",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "details",
+      "element": ".detail>.meta.box>p",
+      "getContent": true,
+      "withHref": false,
+      "subQuery": [
+        {
+          "label": "field",
+          "element": "strong",
+          "getContent": true,
+          "withHref": false,
+          "selectItemsAtIndex": []
+        },
+        {
+          "label": "value",
+          "element": "span",
+          "getContent": true,
+          "withHref": false,
+          "selectItemsAtIndex": []
+        }
+      ],
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "Authors",
+      "element": ".detail>.meta.box>p>span",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        0
+      ]
+    },
+    {
+      "label": "Status",
+      "element": ".detail>.meta.box>p>span",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        1
+      ]
+    },
+    {
+      "label": "Genres",
+      "element": ".detail>.meta.box>p>span",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        2
+      ]
+    },
+    {
+      "label": "Chapters",
+      "element": ".detail>.meta.box>p>span",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        3
+      ]
+    },
+    {
+      "label": "LastUpdate",
+      "element": ".detail>.meta.box>p>span",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        4
+      ]
+    }
+  ]
+}

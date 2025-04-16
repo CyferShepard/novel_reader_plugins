@@ -1,0 +1,33 @@
+{
+  "url": "https://novelbuddy.io/novel/${0}/${1}",
+  "query": [
+    {
+      "label": "novel_title",
+      "element": ".chapter-info>h2>a",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "novel_url",
+      "element": ".chapter-info>h2>a",
+      "getContent": true,
+      "withHref": true,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "chapter_title",
+      "element": "#chapter__content>h1",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "chapter",
+      "element": ".content-inner>p",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    }
+  ]
+}
