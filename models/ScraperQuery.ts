@@ -4,7 +4,7 @@ class ScraperQuery {
   getContent: boolean;
   withHref: boolean;
   subQuery?: ScraperQuery[];
-  selectItemsAtIndex?: number[];
+  selectItemsAtIndex: number[];
 
   constructor({
     label,
@@ -26,7 +26,7 @@ class ScraperQuery {
     this.getContent = getContent;
     this.withHref = withHref;
     this.subQuery = subQuery;
-    this.selectItemsAtIndex = selectItemsAtIndex;
+    this.selectItemsAtIndex = selectItemsAtIndex ?? [];
   }
 
   static fromJson(json: Record<string, unknown>): ScraperQuery {

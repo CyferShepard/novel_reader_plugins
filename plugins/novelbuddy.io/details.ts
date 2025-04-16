@@ -9,28 +9,27 @@ const details: ScraperPayload = new ScraperPayload({
     new ScraperQuery({ label: "tags", element: ".tags>a" }),
     new ScraperQuery({
       label: "Authors",
-      element: ".detail>.meta.box>p>span",
+      element: ".detail>.meta.box>p>a>span",
       selectItemsAtIndex: [0],
     }),
     new ScraperQuery({
       label: "Status",
-      element: ".detail>.meta.box>p>span",
+      element: ".detail>.meta.box>p>a>span",
       selectItemsAtIndex: [1],
     }),
     new ScraperQuery({
       label: "Genres",
       element: ".detail>.meta.box>p>a",
-      selectItemsAtIndex: [2],
     }),
     new ScraperQuery({
       label: "Chapters",
       element: ".detail>.meta.box>p>span",
-      selectItemsAtIndex: [3],
+      selectItemsAtIndex: [0],
     }),
     new ScraperQuery({
       label: "LastUpdate",
       element: ".detail>.meta.box>p>span",
-      selectItemsAtIndex: [4],
+      selectItemsAtIndex: [1],
     }),
   ],
 });

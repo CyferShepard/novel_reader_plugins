@@ -24,7 +24,7 @@
     },
     {
       "label": "Authors",
-      "element": ".detail>.meta.box>p>span",
+      "element": ".detail>.meta.box>p>a>span",
       "getContent": true,
       "withHref": false,
       "selectItemsAtIndex": [
@@ -33,7 +33,7 @@
     },
     {
       "label": "Status",
-      "element": ".detail>.meta.box>p>span",
+      "element": ".detail>.meta.box>p>a>span",
       "getContent": true,
       "withHref": false,
       "selectItemsAtIndex": [
@@ -45,9 +45,7 @@
       "element": ".detail>.meta.box>p>a",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        2
-      ]
+      "selectItemsAtIndex": []
     },
     {
       "label": "Chapters",
@@ -55,7 +53,7 @@
       "getContent": true,
       "withHref": false,
       "selectItemsAtIndex": [
-        3
+        0
       ]
     },
     {
@@ -64,7 +62,7 @@
       "getContent": true,
       "withHref": false,
       "selectItemsAtIndex": [
-        4
+        1
       ]
     }
   ]
