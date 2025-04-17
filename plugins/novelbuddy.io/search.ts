@@ -1,5 +1,4 @@
-import ScraperPayload from "../../models/ScraperPayload.ts";
-import ScraperQuery from "../../models/ScraperQuery.ts";
+import { ScraperQuery, ScraperPayload } from "../../classes/api-parser.ts";
 
 const search: ScraperPayload = new ScraperPayload({
   url: "https://novelbuddy.io/search?q=${0}",

@@ -1,6 +1,4 @@
-import ScraperPayload from "../../models/ScraperPayload.ts";
-import ScraperQuery from "../../models/ScraperQuery.ts";
-import ScraperRegex from "../../models/ScraperRegex.ts";
+import { ScraperQuery, ScraperPayload, ScraperRegex } from "../../classes/api-parser.ts";
 
 const details: ScraperPayload = new ScraperPayload({
   url: "https://novelbuddy.io${0}",

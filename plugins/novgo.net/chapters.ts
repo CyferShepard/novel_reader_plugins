@@ -1,5 +1,4 @@
-import ScraperPayload from "../../models/ScraperPayload.ts";
-import ScraperQuery from "../../models/ScraperQuery.ts";
+import { ScraperQuery, ScraperPayload } from "../../classes/api-parser.ts";
 
 const chapters: ScraperPayload = new ScraperPayload({
   url: "https://novgo.net${0}?page=${1}",
