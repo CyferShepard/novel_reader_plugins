@@ -30,6 +30,20 @@
       "getContent": true,
       "withHref": false,
       "selectItemsAtIndex": []
+    },
+    {
+      "label": "PreviousPage",
+      "element": "#prev_chap",
+      "getContent": true,
+      "withHref": true,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "NextPage",
+      "element": "#next_chap",
+      "getContent": true,
+      "withHref": true,
+      "selectItemsAtIndex": []
     }
   ]
 }

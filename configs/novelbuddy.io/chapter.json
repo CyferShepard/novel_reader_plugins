@@ -1,5 +1,5 @@
 {
-  "url": "https://novelbuddy.io/novel${0}${1}",
+  "url": "https://novelbuddy.io${0}",
   "query": [
     {
       "label": "novel_title",
@@ -27,6 +27,20 @@
       "element": ".content-inner>p",
       "getContent": true,
       "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "PreviousPage",
+      "element": "#btn-prev",
+      "getContent": true,
+      "withHref": true,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "NextPage",
+      "element": "#btn-next",
+      "getContent": true,
+      "withHref": true,
       "selectItemsAtIndex": []
     }
   ]

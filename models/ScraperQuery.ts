@@ -1,3 +1,5 @@
+import ScraperRegex from "./ScraperRegex.ts";
+
 class ScraperQuery {
   label: string;
   element: string;
@@ -6,6 +8,7 @@ class ScraperQuery {
   dataProp?: string;
   subQuery?: ScraperQuery[];
   selectItemsAtIndex: number[];
+  regex?: ScraperRegex;
 
   constructor({
     label,
@@ -15,6 +18,7 @@ class ScraperQuery {
     dataProp,
     subQuery,
     selectItemsAtIndex,
+    regex,
   }: {
     label: string;
     element: string;
@@ -23,6 +27,7 @@ class ScraperQuery {
     dataProp?: string;
     subQuery?: ScraperQuery[];
     selectItemsAtIndex?: number[];
+    regex?: ScraperRegex;
   }) {
     this.label = label;
     this.element = element;
@@ -31,6 +36,7 @@ class ScraperQuery {
     this.dataProp = dataProp;
     this.subQuery = subQuery;
     this.selectItemsAtIndex = selectItemsAtIndex ?? [];
+    this.regex = regex;
   }
 
   static fromJson(json: Record<string, unknown>): ScraperQuery {
@@ -42,6 +48,7 @@ class ScraperQuery {
       dataProp: json["dataProp"] as string,
       subQuery: (json["subQuery"] as Array<Record<string, unknown>>)?.map((e) => ScraperQuery.fromJson(e)) ?? [],
       selectItemsAtIndex: (json["selectItemsAtIndex"] as Array<number>) ?? [],
+      regex: json["regex"] ? ScraperRegex.fromJson(json["regex"] as Record<string, unknown>) : undefined,
     });
   }
 
@@ -54,6 +61,7 @@ class ScraperQuery {
       dataProp: this.dataProp,
       subQuery: this.subQuery?.map((e) => e.toJson()),
       selectItemsAtIndex: this.selectItemsAtIndex ?? [],
+      regex: this.regex ? this.regex.toJson() : undefined,
     };
   }
 }

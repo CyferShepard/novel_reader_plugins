@@ -1,8 +1,9 @@
 import ScraperPayload from "../../models/ScraperPayload.ts";
 import ScraperQuery from "../../models/ScraperQuery.ts";
+import ScraperRegex from "../../models/ScraperRegex.ts";
 
 const details: ScraperPayload = new ScraperPayload({
-  url: "https://novelbuddy.io/novel${0}",
+  url: "https://novelbuddy.io${0}",
   query: [
     new ScraperQuery({ label: "title", element: ".detail>.name.box>h1" }),
     new ScraperQuery({ label: "summary", element: ".summary>p" }),
@@ -30,6 +31,12 @@ const details: ScraperPayload = new ScraperPayload({
       label: "LastUpdate",
       element: ".detail>.meta.box>p>span",
       selectItemsAtIndex: [1],
+    }),
+    new ScraperQuery({
+      label: "BookId",
+      element: ".layout>script",
+      selectItemsAtIndex: [0],
+      regex: new ScraperRegex({ regex: /var bookId = (\d+);/, process: (match) => (match ? match[1] : null) }),
     }),
   ],
 });

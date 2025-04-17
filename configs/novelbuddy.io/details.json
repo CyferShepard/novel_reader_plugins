@@ -1,5 +1,5 @@
 {
-  "url": "https://novelbuddy.io/novel${0}",
+  "url": "https://novelbuddy.io${0}",
   "query": [
     {
       "label": "title",
@@ -64,6 +64,19 @@
       "selectItemsAtIndex": [
         1
       ]
+    },
+    {
+      "label": "BookId",
+      "element": ".layout>script",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        0
+      ],
+      "regex": {
+        "regex": "var bookId = (\\d+);",
+        "process": "(match)=>match ? match[1] : null"
+      }
     }
   ]
 }

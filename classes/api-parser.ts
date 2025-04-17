@@ -51,6 +51,16 @@ class ScraperParser {
               this.#addResult(result, query.label, element.textContent?.replace(/\s+/g, " ").trim());
             }
           }
+
+          if (query.regex != null) {
+            const regex = query.regex.regex;
+            const regexMatch = regex ? result[query.label]?.toString().match(regex) : null;
+            if (regexMatch) {
+              const processedValue = query.regex.process ? query.regex.process(regexMatch) : regexMatch[0];
+
+              this.#replaceResult(result, query.label, processedValue);
+            }
+          }
           if (Object.keys(result).length > 0) {
             results.push(result);
           }
@@ -81,6 +91,14 @@ class ScraperParser {
     } else {
       result[key] = value;
     }
+    return result;
+  }
+
+  #replaceResult(result: Record<string, unknown>, key: string, value: unknown): Record<string, unknown> {
+    if (value == null || value === "") {
+      return result;
+    }
+    result[key] = value;
     return result;
   }
 
