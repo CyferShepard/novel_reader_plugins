@@ -6,7 +6,9 @@
       "element": ".title",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": []
+      "selectItemsAtIndex": [
+        0
+      ]
     },
     {
       "label": "summary",
