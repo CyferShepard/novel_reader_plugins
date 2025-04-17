@@ -66,17 +66,26 @@
       ]
     },
     {
-      "label": "BookId",
-      "element": ".layout>script",
+      "label": "AdditionalProps",
+      "element": ".layout",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        0
+      "subQuery": [
+        {
+          "label": "BookId",
+          "element": "script",
+          "getContent": true,
+          "withHref": false,
+          "selectItemsAtIndex": [
+            0
+          ],
+          "regex": {
+            "regex": "var bookId = (\\d+);",
+            "process": "(match)=>match ? match[1] : null"
+          }
+        }
       ],
-      "regex": {
-        "regex": "var bookId = (\\d+);",
-        "process": "(match)=>match ? match[1] : null"
-      }
+      "selectItemsAtIndex": []
     }
   ]
 }

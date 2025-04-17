@@ -31,10 +31,16 @@ const details: ScraperPayload = new ScraperPayload({
       selectItemsAtIndex: [1],
     }),
     new ScraperQuery({
-      label: "BookId",
-      element: ".layout>script",
-      selectItemsAtIndex: [0],
-      regex: new ScraperRegex({ regex: /var bookId = (\d+);/, process: (match) => (match ? match[1] : null) }),
+      label: "AdditionalProps",
+      element: ".layout",
+      subQuery: [
+        new ScraperQuery({
+          label: "BookId",
+          element: "script",
+          selectItemsAtIndex: [0],
+          regex: new ScraperRegex({ regex: /var bookId = (\d+);/, process: (match) => (match ? match[1] : null) }),
+        }),
+      ],
     }),
   ],
 });
