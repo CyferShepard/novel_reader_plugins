@@ -1,6 +1,6 @@
 import { parseQuery, ScraperPayload } from "./classes/api-parser.ts";
 
-import details from "./plugins/novelbuddy.io/details.ts";
+import details from "./plugins/novgo.net/details.ts";
 
 export function add(a: number, b: number): number {
   return a + b;
@@ -14,7 +14,7 @@ function substitute(template: string, ...values: string[]): string {
 if (import.meta.main) {
   const specificConfig: ScraperPayload | undefined = details;
   if (specificConfig !== undefined) {
-    specificConfig.url = substitute(specificConfig.url, "/novel/mtl-returning-to-90s-she-became-famous-in-major-surgical-fields");
+    specificConfig.url = substitute(specificConfig.url, "/cultivation-online-novel.html");
     parseQuery(specificConfig).then((response) => {
       if (response) {
         console.log(response.toJson());

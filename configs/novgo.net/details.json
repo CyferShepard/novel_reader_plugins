@@ -29,18 +29,13 @@
       "element": ".info>div",
       "getContent": true,
       "withHref": false,
-      "subQuery": [
-        {
-          "label": "Status",
-          "element": "a",
-          "getContent": true,
-          "withHref": false,
-          "selectItemsAtIndex": []
-        }
-      ],
       "selectItemsAtIndex": [
         3
-      ]
+      ],
+      "regex": {
+        "regex": "Status:\\s*([^<]+)",
+        "process": "(match)=>match ? match[match.length - 1] : null"
+      }
     },
     {
       "label": "Genres",
@@ -49,7 +44,11 @@
       "withHref": false,
       "selectItemsAtIndex": [
         1
-      ]
+      ],
+      "regex": {
+        "regex": "^Genre:\\s*",
+        "process": "(match)=>match?.input?.replace(match[0], \"\") ?? \"\""
+      }
     }
   ]
 }

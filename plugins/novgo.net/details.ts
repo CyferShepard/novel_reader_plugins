@@ -1,4 +1,4 @@
-import { ScraperQuery, ScraperPayload } from "../../classes/api-parser.ts";
+import { ScraperQuery, ScraperPayload, ScraperRegex } from "../../classes/api-parser.ts";
 
 const details: ScraperPayload = new ScraperPayload({
   url: "https://novgo.net${0}",
@@ -15,17 +15,19 @@ const details: ScraperPayload = new ScraperPayload({
       label: "Status",
       element: ".info>div",
       selectItemsAtIndex: [3],
-      subQuery: [
-        new ScraperQuery({
-          label: "Status",
-          element: "a",
-        }),
-      ],
+      regex: new ScraperRegex({
+        regex: /Status:\s*([^<]+)/,
+        process: (match) => (match ? match[match.length - 1] : null),
+      }),
     }),
     new ScraperQuery({
       label: "Genres",
       element: ".info>div",
       selectItemsAtIndex: [1],
+      regex: new ScraperRegex({
+        regex: /^Genre:\s*/, // Match "Genre:" and any following spaces
+        process: (match) => match?.input?.replace(match[0], "") ?? "", // Replace the matched part with an empty string
+      }),
     }),
     // new ScraperQuery({
     //   label: "Chapters",
