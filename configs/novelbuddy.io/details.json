@@ -2,6 +2,12 @@
   "url": "https://novelbuddy.io${0}",
   "query": [
     {
+      "label": "url",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
       "label": "title",
       "element": ".detail>.name.box>h1",
       "getContent": true,

@@ -9,9 +9,9 @@ const search: ScraperPayload = new ScraperPayload({
       subQuery: [
         new ScraperQuery({ label: "url", element: ".truyen-title>a", withHref: true }),
         new ScraperQuery({ label: "title", element: ".truyen-title>a" }),
-        new ScraperQuery({ label: "summary", element: "" }),
+        new ScraperQuery({ label: "summary" }),
         new ScraperQuery({ label: "cover", element: "img", withHref: true }),
-        new ScraperQuery({ label: "genres", element: "" }),
+        new ScraperQuery({ label: "genres" }),
       ],
     }),
   ],

@@ -3,9 +3,10 @@ import { ScraperQuery, ScraperPayload, ScraperRegex } from "../../classes/api-pa
 const details: ScraperPayload = new ScraperPayload({
   url: "https://novgo.net${0}",
   query: [
+    new ScraperQuery({ label: "url", element: ".pagination>li.active>a" }),
     new ScraperQuery({ label: "title", element: ".title", selectItemsAtIndex: [0] }),
     new ScraperQuery({ label: "summary", element: ".desc-text>p" }),
-    // new ScraperQuery({ label: "tags", element: "" }),
+    new ScraperQuery({ label: "tags" }),
     new ScraperQuery({
       label: "Author",
       element: ".info>div>a",
@@ -29,14 +30,12 @@ const details: ScraperPayload = new ScraperPayload({
         process: (match) => match?.input?.replace(match[0], "") ?? "", // Replace the matched part with an empty string
       }),
     }),
-    // new ScraperQuery({
-    //   label: "Chapters",
-    //   element: "",
-    // }),
-    // new ScraperQuery({
-    //   label: "LastUpdate",
-    //   element: "",
-    // }),
+    new ScraperQuery({
+      label: "Chapters",
+    }),
+    new ScraperQuery({
+      label: "LastUpdate",
+    }),
   ],
 });
 

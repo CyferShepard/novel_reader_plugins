@@ -2,6 +2,13 @@
   "url": "https://novgo.net${0}",
   "query": [
     {
+      "label": "url",
+      "element": ".pagination>li.active>a",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
       "label": "title",
       "element": ".title",
       "getContent": true,
@@ -13,6 +20,12 @@
     {
       "label": "summary",
       "element": ".desc-text>p",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "tags",
       "getContent": true,
       "withHref": false,
       "selectItemsAtIndex": []
@@ -51,6 +64,18 @@
         "regex": "^Genre:\\s*",
         "process": "(match)=>match?.input?.replace(match[0], \"\") ?? \"\""
       }
+    },
+    {
+      "label": "Chapters",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "LastUpdate",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
     }
   ]
 }

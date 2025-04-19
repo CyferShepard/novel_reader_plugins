@@ -12,8 +12,8 @@ const chapters: ScraperPayload = new ScraperPayload({
         new ScraperQuery({ label: "date", element: ".chapter-update" }),
       ],
     }),
-    // new ScraperQuery({ label: "CurentPage", element: ".pagination>li.active>a", dataProp: "data-page" }),
-    // new ScraperQuery({ label: "LastPage", element: ".last>a", dataProp: "data-page" }),
+    new ScraperQuery({ label: "CurentPage" }),
+    new ScraperQuery({ label: "LastPage" }),
   ],
 });
 

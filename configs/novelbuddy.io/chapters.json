@@ -30,6 +30,18 @@
         }
       ],
       "selectItemsAtIndex": []
+    },
+    {
+      "label": "CurentPage",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "LastPage",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
     }
   ]
 }

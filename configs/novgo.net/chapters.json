@@ -21,6 +21,12 @@
           "withHref": false,
           "dataProp": "title",
           "selectItemsAtIndex": []
+        },
+        {
+          "label": "date",
+          "getContent": true,
+          "withHref": false,
+          "selectItemsAtIndex": []
         }
       ],
       "selectItemsAtIndex": []

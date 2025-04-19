@@ -9,7 +9,7 @@ const chapters: ScraperPayload = new ScraperPayload({
       subQuery: [
         new ScraperQuery({ label: "url", element: "a", withHref: true }),
         new ScraperQuery({ label: "title", element: "a", dataProp: "title" }),
-        // new ScraperQuery({ label: "date", element: ".chapter-update" }),
+        new ScraperQuery({ label: "date" }),
       ],
     }),
     new ScraperQuery({ label: "CurentPage", element: ".pagination>li.active>a", dataProp: "data-page" }),
