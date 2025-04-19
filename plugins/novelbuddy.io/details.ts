@@ -18,7 +18,12 @@ const details: ScraperPayload = new ScraperPayload({
     }),
     new ScraperQuery({
       label: "Genres",
-      element: ".detail>.meta.box>p>a",
+      element: ".detail>.meta.box>p",
+      selectItemsAtIndex: [2],
+      regex: new ScraperRegex({
+        regex: /^Genres :\s*/, // Match "Genre:" and any following spaces
+        process: (match) => match?.input?.replace(match[0], "") ?? "", // Replace the matched part with an empty string
+      }),
     }),
     new ScraperQuery({
       label: "Chapters",

@@ -42,10 +42,16 @@
     },
     {
       "label": "Genres",
-      "element": ".detail>.meta.box>p>a",
+      "element": ".detail>.meta.box>p",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": []
+      "selectItemsAtIndex": [
+        2
+      ],
+      "regex": {
+        "regex": "^Genres :\\s*",
+        "process": "(match)=>match?.input?.replace(match[0], \"\") ?? \"\""
+      }
     },
     {
       "label": "Chapters",
