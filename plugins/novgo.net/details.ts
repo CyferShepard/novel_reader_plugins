@@ -3,7 +3,7 @@ import { ScraperQuery, ScraperPayload, ScraperRegex } from "../../classes/api-pa
 const details: ScraperPayload = new ScraperPayload({
   url: "https://novgo.net${0}",
   query: [
-    new ScraperQuery({ label: "url", element: ".pagination>li.active>a" }),
+    new ScraperQuery({ label: "url", element: ".pagination>li.active>a", withHref: true }),
     new ScraperQuery({ label: "title", element: ".title", selectItemsAtIndex: [0] }),
     new ScraperQuery({ label: "summary", element: ".desc-text>p" }),
     new ScraperQuery({ label: "tags" }),

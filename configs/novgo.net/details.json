@@ -5,7 +5,7 @@
       "label": "url",
       "element": ".pagination>li.active>a",
       "getContent": true,
-      "withHref": false,
+      "withHref": true,
       "selectItemsAtIndex": []
     },
     {
