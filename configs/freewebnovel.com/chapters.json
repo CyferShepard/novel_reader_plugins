@@ -1,12 +1,12 @@
 {
-  "url": "https://novgo.net${0}?page=${1}",
+  "url": "https://freewebnovel.com${0}",
   "type": "GET",
   "body": "",
   "bodyType": "JSON",
   "query": [
     {
       "label": "chapters",
-      "element": "ul.list-chapter>li",
+      "element": "#idData>li",
       "getContent": true,
       "withHref": false,
       "subQuery": [
@@ -36,21 +36,15 @@
     },
     {
       "label": "CurentPage",
-      "element": ".pagination>li.active>a",
       "getContent": true,
       "withHref": false,
-      "dataProp": "data-page",
-      "selectItemsAtIndex": [],
-      "transformProcess": "(value)=>parseInt(value) + 1"
+      "selectItemsAtIndex": []
     },
     {
       "label": "LastPage",
-      "element": ".last>a",
       "getContent": true,
       "withHref": false,
-      "dataProp": "data-page",
-      "selectItemsAtIndex": [],
-      "transformProcess": "(value)=>parseInt(value) + 1"
+      "selectItemsAtIndex": []
     }
   ]
 }

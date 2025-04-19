@@ -1,6 +1,6 @@
 import { parseQuery, ScraperPayload } from "./classes/api-parser.ts";
 
-import chapters from "./plugins/novgo.net/chapters.ts";
+import details from "./plugins/freewebnovel.com/chapter.ts";
 
 export function add(a: number, b: number): number {
   return a + b;
@@ -12,9 +12,20 @@ function substitute(template: string, ...values: string[]): string {
 
 // Learn more at https://docs.deno.com/runtime/manual/examples/module_metadata#concepts
 if (import.meta.main) {
-  const specificConfig: ScraperPayload | undefined = chapters;
+  const specificConfig: ScraperPayload | undefined = details;
   if (specificConfig !== undefined) {
-    specificConfig.url = substitute(specificConfig.url, "/the-great-mage-returns-after-4000-years.html", "1");
+    specificConfig.url = substitute(specificConfig.url, "/novel/unintended-immortality/chapter-360");
+    // if (specificConfig.body instanceof FormData) {
+    //   let index = 0;
+    //   specificConfig.body.forEach((value: string, key: string) => {
+    //     if (index === 0) {
+    //       console.log(key, value); // Log the key and value
+    //       specificConfig.body.set(key, "return"); // Set the value for the matching key
+    //     }
+    //     index++;
+    //   });
+    // }
+    // console.log(specificConfig);
     parseQuery(specificConfig).then((response) => {
       if (response) {
         console.log(response.toJson());

@@ -1,28 +1,30 @@
 {
-  "url": "https://novgo.net${0}",
+  "url": "https://freewebnovel.com${0}",
   "type": "GET",
   "body": "",
   "bodyType": "JSON",
   "query": [
     {
       "label": "url",
-      "element": ".pagination>li.active>a",
+      "element": ".cur.cur-1>.wp>a",
       "getContent": true,
       "withHref": true,
-      "selectItemsAtIndex": []
+      "selectItemsAtIndex": [
+        2
+      ]
     },
     {
       "label": "title",
-      "element": ".title",
+      "element": ".cur.cur-1>.wp>a",
       "getContent": true,
       "withHref": false,
       "selectItemsAtIndex": [
-        0
+        2
       ]
     },
     {
       "label": "summary",
-      "element": ".desc-text>p",
+      "element": ".m-desc>.txt>.inner",
       "getContent": true,
       "withHref": false,
       "selectItemsAtIndex": []
@@ -35,38 +37,29 @@
     },
     {
       "label": "Author",
-      "element": ".info>div>a",
-      "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": [
-        0
-      ]
-    },
-    {
-      "label": "Status",
-      "element": ".info>div",
-      "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": [
-        3
-      ],
-      "regex": {
-        "regex": "Status:\\s*([^<]+)",
-        "process": "(match)=>match ? match[match.length - 1] : null"
-      }
-    },
-    {
-      "label": "Genres",
-      "element": ".info>div",
+      "element": ".m-imgtxt>.txt>.item>.right",
       "getContent": true,
       "withHref": false,
       "selectItemsAtIndex": [
         1
+      ]
+    },
+    {
+      "label": "Status",
+      "element": ".m-imgtxt>.txt>.item>.right>.s1.s2",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": []
+    },
+    {
+      "label": "Genres",
+      "element": ".m-imgtxt>.txt>.item>.right",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        2
       ],
-      "regex": {
-        "regex": "^Genre:\\s*",
-        "process": "(match)=>match?.input?.replace(match[0], \"\") ?? \"\""
-      }
+      "transformProcess": "(value)=>value.split(\",\")"
     },
     {
       "label": "Chapters",

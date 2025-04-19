@@ -1,5 +1,8 @@
 {
   "url": "https://novelbuddy.io${0}",
+  "type": "GET",
+  "body": "",
+  "bodyType": "JSON",
   "query": [
     {
       "label": "novel_title",

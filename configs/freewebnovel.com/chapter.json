@@ -1,12 +1,12 @@
 {
-  "url": "https://novgo.net${0}",
+  "url": "https://freewebnovel.com${0}",
   "type": "GET",
   "body": "",
   "bodyType": "JSON",
   "query": [
     {
       "label": "novel_title",
-      "element": ".truyen-title",
+      "element": ".tit>a",
       "getContent": true,
       "withHref": false,
       "dataProp": "title",
@@ -14,39 +14,40 @@
     },
     {
       "label": "novel_url",
-      "element": ".truyen-title",
+      "element": ".tit>a",
       "getContent": true,
       "withHref": true,
       "selectItemsAtIndex": []
     },
     {
       "label": "chapter_title",
-      "element": ".chapter-title",
+      "element": ".chapter",
       "getContent": true,
       "withHref": false,
-      "dataProp": "title",
       "selectItemsAtIndex": []
     },
     {
       "label": "chapter",
-      "element": "#chapter-content",
+      "element": "#article",
       "getContent": true,
       "withHref": false,
       "selectItemsAtIndex": []
     },
     {
       "label": "PreviousPage",
-      "element": "#prev_chap",
+      "element": "#prev_url",
       "getContent": true,
       "withHref": true,
-      "selectItemsAtIndex": []
+      "selectItemsAtIndex": [],
+      "transformProcess": "(value)=>value.split(\"/\").length - 1 > 2 ? value : \"\""
     },
     {
       "label": "NextPage",
-      "element": "#next_chap",
+      "element": "#next_url",
       "getContent": true,
       "withHref": true,
-      "selectItemsAtIndex": []
+      "selectItemsAtIndex": [],
+      "transformProcess": "(value)=>value.split(\"/\").length - 1 > 2 ? value : \"\""
     }
   ]
 }

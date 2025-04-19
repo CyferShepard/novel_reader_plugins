@@ -1,27 +1,28 @@
 {
-  "url": "https://novgo.net/search?keyword=${0}",
-  "type": "GET",
-  "body": "",
-  "bodyType": "JSON",
+  "url": "https://freewebnovel.com/search",
+  "type": "POST",
+  "body": "searchkey=searchterm",
+  "bodyType": "FORM_DATA",
   "query": [
     {
       "label": "results",
-      "element": ".row",
+      "element": ".con",
       "getContent": true,
       "withHref": false,
       "subQuery": [
         {
           "label": "url",
-          "element": ".truyen-title>a",
+          "element": ".tit>a",
           "getContent": true,
           "withHref": true,
           "selectItemsAtIndex": []
         },
         {
           "label": "title",
-          "element": ".truyen-title>a",
+          "element": ".tit>a",
           "getContent": true,
           "withHref": false,
+          "dataProp": "title",
           "selectItemsAtIndex": []
         },
         {
@@ -32,16 +33,20 @@
         },
         {
           "label": "cover",
-          "element": "img",
+          "element": ".pic>a>img",
           "getContent": true,
           "withHref": true,
           "selectItemsAtIndex": []
         },
         {
           "label": "genres",
+          "element": ".txt>.desc>.item>.right>a",
           "getContent": true,
           "withHref": false,
-          "selectItemsAtIndex": []
+          "selectItemsAtIndex": [
+            0,
+            1
+          ]
         }
       ],
       "selectItemsAtIndex": []

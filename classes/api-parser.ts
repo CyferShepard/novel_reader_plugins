@@ -1,3 +1,11 @@
-import { ScraperPayload, ScraperResponse, ScraperQuery, ScraperRegex, parseQuery } from "../../api-parser/mod.ts";
+import {
+  ScraperPayload,
+  ScraperResponse,
+  ScraperQuery,
+  ScraperRegex,
+  parseQuery,
+  HTTPMethod,
+  BodyType,
+} from "../../api-parser/mod.ts";
 
-export { ScraperPayload, ScraperResponse, ScraperQuery, ScraperRegex, parseQuery };
+export { ScraperPayload, ScraperResponse, ScraperQuery, ScraperRegex, parseQuery, HTTPMethod, BodyType };
