@@ -12,8 +12,18 @@ const chapters: ScraperPayload = new ScraperPayload({
         new ScraperQuery({ label: "date" }),
       ],
     }),
-    new ScraperQuery({ label: "CurentPage", element: ".pagination>li.active>a", dataProp: "data-page" }),
-    new ScraperQuery({ label: "LastPage", element: ".last>a", dataProp: "data-page" }),
+    new ScraperQuery({
+      label: "CurentPage",
+      element: ".pagination>li.active>a",
+      dataProp: "data-page",
+      transformProcess: (value) => parseInt(value) + 1,
+    }),
+    new ScraperQuery({
+      label: "LastPage",
+      element: ".last>a",
+      dataProp: "data-page",
+      transformProcess: (value) => parseInt(value) + 1,
+    }),
   ],
 });
 

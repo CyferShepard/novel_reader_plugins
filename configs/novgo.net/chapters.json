@@ -37,7 +37,8 @@
       "getContent": true,
       "withHref": false,
       "dataProp": "data-page",
-      "selectItemsAtIndex": []
+      "selectItemsAtIndex": [],
+      "transformProcess": "(value)=>parseInt(value) + 1"
     },
     {
       "label": "LastPage",
@@ -45,7 +46,8 @@
       "getContent": true,
       "withHref": false,
       "dataProp": "data-page",
-      "selectItemsAtIndex": []
+      "selectItemsAtIndex": [],
+      "transformProcess": "(value)=>parseInt(value) + 1"
     }
   ]
 }
