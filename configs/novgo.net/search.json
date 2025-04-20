@@ -35,7 +35,8 @@
           "element": "img",
           "getContent": true,
           "withHref": true,
-          "selectItemsAtIndex": []
+          "selectItemsAtIndex": [],
+          "transformProcess": "(value)=>\"https://novgo.net\" + value"
         },
         {
           "label": "genres",

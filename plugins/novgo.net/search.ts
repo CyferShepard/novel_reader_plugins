@@ -10,7 +10,12 @@ const search: ScraperPayload = new ScraperPayload({
         new ScraperQuery({ label: "url", element: ".truyen-title>a", withHref: true }),
         new ScraperQuery({ label: "title", element: ".truyen-title>a" }),
         new ScraperQuery({ label: "summary" }),
-        new ScraperQuery({ label: "cover", element: "img", withHref: true }),
+        new ScraperQuery({
+          label: "cover",
+          element: "img",
+          withHref: true,
+          transformProcess: (value) => "https://novgo.net" + value,
+        }),
         new ScraperQuery({ label: "genres" }),
       ],
     }),
