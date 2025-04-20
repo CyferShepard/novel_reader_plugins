@@ -36,7 +36,7 @@
           "getContent": true,
           "withHref": true,
           "selectItemsAtIndex": [],
-          "transformProcess": "(value)=>value"
+          "transformProcess": "(value)=>{\n            if (value.startsWith(\"/\")) {\n              return \"https://novgo.net\" + value;\n            } else {\n              return value;\n            }\n          }"
         },
         {
           "label": "genres",

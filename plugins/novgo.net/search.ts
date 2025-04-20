@@ -14,7 +14,13 @@ const search: ScraperPayload = new ScraperPayload({
           label: "cover",
           element: "img",
           withHref: true,
-          transformProcess: (value) => value,
+          transformProcess: (value) => {
+            if (value.startsWith("/")) {
+              return "https://novgo.net" + value;
+            } else {
+              return value;
+            }
+          },
         }),
         new ScraperQuery({ label: "genres" }),
       ],
