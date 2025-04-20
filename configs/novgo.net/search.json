@@ -36,7 +36,7 @@
           "getContent": true,
           "withHref": true,
           "selectItemsAtIndex": [],
-          "transformProcess": "(value)=>\"https://novgo.net\" + value"
+          "transformProcess": "(value)=>value"
         },
         {
           "label": "genres",
