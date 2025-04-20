@@ -73,7 +73,8 @@
       "regex": {
         "regex": "^Genre:\\s*",
         "process": "(match)=>match?.input?.replace(match[0], \"\") ?? \"\""
-      }
+      },
+      "transformProcess": "(value)=>{\n        if (value.startsWith(\"/\")) {\n          return \"https://novgo.net\" + value;\n        } else {\n          return value;\n        }\n      }"
     },
     {
       "label": "Chapters",

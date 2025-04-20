@@ -30,6 +30,13 @@ const details: ScraperPayload = new ScraperPayload({
         regex: /^Genre:\s*/, // Match "Genre:" and any following spaces
         process: (match) => match?.input?.replace(match[0], "") ?? "", // Replace the matched part with an empty string
       }),
+      transformProcess: (value) => {
+        if (value.startsWith("/")) {
+          return "https://novgo.net" + value;
+        } else {
+          return value;
+        }
+      },
     }),
     new ScraperQuery({
       label: "Chapters",
