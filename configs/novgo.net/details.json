@@ -12,6 +12,13 @@
       "selectItemsAtIndex": []
     },
     {
+      "label": "cover",
+      "element": ".books>.book>img",
+      "getContent": true,
+      "withHref": true,
+      "selectItemsAtIndex": []
+    },
+    {
       "label": "title",
       "element": ".title",
       "getContent": true,

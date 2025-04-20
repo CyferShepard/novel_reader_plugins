@@ -4,6 +4,7 @@ const details: ScraperPayload = new ScraperPayload({
   url: "https://freewebnovel.com${0}",
   query: [
     new ScraperQuery({ label: "url", element: ".cur.cur-1>.wp>a", selectItemsAtIndex: [2], withHref: true }),
+    new ScraperQuery({ label: "cover", element: ".m-imgtxt>.pic>img", withHref: true }),
     new ScraperQuery({ label: "title", element: ".cur.cur-1>.wp>a", selectItemsAtIndex: [2] }),
     new ScraperQuery({ label: "summary", element: ".m-desc>.txt>.inner" }),
     new ScraperQuery({

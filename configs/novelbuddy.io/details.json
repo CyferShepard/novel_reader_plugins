@@ -11,6 +11,13 @@
       "selectItemsAtIndex": []
     },
     {
+      "label": "cover",
+      "element": ".cover>.img-cover>img",
+      "getContent": true,
+      "withHref": true,
+      "selectItemsAtIndex": []
+    },
+    {
       "label": "title",
       "element": ".detail>.name.box>h1",
       "getContent": true,

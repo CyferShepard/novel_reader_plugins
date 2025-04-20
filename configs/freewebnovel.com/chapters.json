@@ -18,6 +18,18 @@
           "selectItemsAtIndex": []
         },
         {
+          "label": "index",
+          "element": "a",
+          "getContent": true,
+          "withHref": false,
+          "dataProp": "title",
+          "selectItemsAtIndex": [],
+          "regex": {
+            "regex": "Chapter\\s+(\\d+)",
+            "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
+          }
+        },
+        {
           "label": "title",
           "element": "a",
           "getContent": true,

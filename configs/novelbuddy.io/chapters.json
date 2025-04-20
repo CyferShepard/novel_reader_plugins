@@ -18,6 +18,17 @@
           "selectItemsAtIndex": []
         },
         {
+          "label": "index",
+          "element": ".chapter-title",
+          "getContent": true,
+          "withHref": false,
+          "selectItemsAtIndex": [],
+          "regex": {
+            "regex": "C\\.+(\\d+)",
+            "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
+          }
+        },
+        {
           "label": "title",
           "element": ".chapter-title",
           "getContent": true,

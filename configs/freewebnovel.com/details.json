@@ -14,6 +14,13 @@
       ]
     },
     {
+      "label": "cover",
+      "element": ".m-imgtxt>.pic>img",
+      "getContent": true,
+      "withHref": true,
+      "selectItemsAtIndex": []
+    },
+    {
       "label": "title",
       "element": ".cur.cur-1>.wp>a",
       "getContent": true,

@@ -4,6 +4,7 @@ const details: ScraperPayload = new ScraperPayload({
   url: "https://novelbuddy.io${0}",
   query: [
     new ScraperQuery({ label: "url" }),
+    new ScraperQuery({ label: "cover", element: ".cover>.img-cover>img", withHref: true }),
     new ScraperQuery({ label: "title", element: ".detail>.name.box>h1" }),
     new ScraperQuery({ label: "summary", element: ".summary>p" }),
     new ScraperQuery({ label: "tags", element: ".tags>a" }),
