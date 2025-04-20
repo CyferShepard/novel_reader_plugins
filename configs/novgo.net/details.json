@@ -16,7 +16,8 @@
       "element": ".books>.book>img",
       "getContent": true,
       "withHref": true,
-      "selectItemsAtIndex": []
+      "selectItemsAtIndex": [],
+      "transformProcess": "(value)=>{\n        if (value.startsWith(\"/uploads\")) {\n          return \"https://novgo.net\" + value;\n        } else {\n          return value;\n        }\n      }"
     },
     {
       "label": "title",
