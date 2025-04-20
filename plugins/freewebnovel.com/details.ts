@@ -1,10 +1,21 @@
-import { ScraperQuery, ScraperPayload, ScraperRegex } from "../../classes/api-parser.ts";
+import { ScraperQuery, ScraperPayload } from "../../classes/api-parser.ts";
 
 const details: ScraperPayload = new ScraperPayload({
   url: "https://freewebnovel.com${0}",
   query: [
     new ScraperQuery({ label: "url", element: ".cur.cur-1>.wp>a", selectItemsAtIndex: [2], withHref: true }),
-    new ScraperQuery({ label: "cover", element: ".m-imgtxt>.pic>img", withHref: true }),
+    new ScraperQuery({
+      label: "cover",
+      element: ".m-imgtxt>.pic>img",
+      withHref: true,
+      transformProcess: (value) => {
+        if (value.startsWith("/files")) {
+          return "https://freewebnovel.com" + value;
+        } else {
+          return value;
+        }
+      },
+    }),
     new ScraperQuery({ label: "title", element: ".cur.cur-1>.wp>a", selectItemsAtIndex: [2] }),
     new ScraperQuery({ label: "summary", element: ".m-desc>.txt>.inner" }),
     new ScraperQuery({
