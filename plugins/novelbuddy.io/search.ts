@@ -10,7 +10,18 @@ const search: ScraperPayload = new ScraperPayload({
         new ScraperQuery({ label: "url", element: ".meta>.title>h3>a", withHref: true }),
         new ScraperQuery({ label: "title", element: ".meta>.title>h3>a" }),
         new ScraperQuery({ label: "summary", element: ".meta>.summary>p" }),
-        new ScraperQuery({ label: "cover", element: ".book-detailed-item>.thumb>a>img", withHref: true }),
+        new ScraperQuery({
+          label: "cover",
+          element: ".meta>.title>h3>a",
+          withHref: true,
+          transformProcess: (value) => {
+            if (value.startsWith("/novel")) {
+              return "https://static.novelbuddy.com/images" + value.replace("/novel", "") + ".webp";
+            } else {
+              return value;
+            }
+          },
+        }),
         new ScraperQuery({ label: "genres", element: ".meta>.genres>span" }),
       ],
     }),

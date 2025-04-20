@@ -16,7 +16,18 @@ const search: ScraperPayload = new ScraperPayload({
         new ScraperQuery({ label: "url", element: ".tit>a", withHref: true }),
         new ScraperQuery({ label: "title", element: ".tit>a", dataProp: "title" }),
         new ScraperQuery({ label: "summary" }),
-        new ScraperQuery({ label: "cover", element: ".pic>a>img", withHref: true }),
+        new ScraperQuery({
+          label: "cover",
+          element: ".pic>a>img",
+          withHref: true,
+          transformProcess: (value) => {
+            if (value.startsWith("/files")) {
+              return "https://freewebnovel.com" + value;
+            } else {
+              return value;
+            }
+          },
+        }),
         new ScraperQuery({ label: "genres", element: ".txt>.desc>.item>.right>a", selectItemsAtIndex: [0, 1] }),
       ],
     }),

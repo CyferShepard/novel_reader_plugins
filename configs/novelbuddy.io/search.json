@@ -33,10 +33,11 @@
         },
         {
           "label": "cover",
-          "element": ".book-detailed-item>.thumb>a>img",
+          "element": ".meta>.title>h3>a",
           "getContent": true,
           "withHref": true,
-          "selectItemsAtIndex": []
+          "selectItemsAtIndex": [],
+          "transformProcess": "(value)=>{\n            if (value.startsWith(\"/novel\")) {\n              return \"https://static.novelbuddy.com/images\" + value.replace(\"/novel\", \"\") + \".webp\";\n            } else {\n              return value;\n            }\n          }"
         },
         {
           "label": "genres",
