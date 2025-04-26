@@ -1,10 +1,6 @@
 import { parseQuery, ScraperPayload } from "./classes/api-parser.ts";
 
-import details from "./plugins/freewebnovel.com/chapters.ts";
-
-export function add(a: number, b: number): number {
-  return a + b;
-}
+import details from "./plugins/novelbuddy.io/search.ts";
 
 function substitute(template: string, ...values: string[]): string {
   return template.replace(/\$\{(\d+)\}/g, (_, index) => values[Number(index)] || "");
@@ -14,7 +10,7 @@ function substitute(template: string, ...values: string[]): string {
 if (import.meta.main) {
   const specificConfig: ScraperPayload | undefined = details;
   if (specificConfig !== undefined) {
-    specificConfig.url = substitute(specificConfig.url, "/novel/unintended-immortality");
+    specificConfig.url = substitute(specificConfig.url, "return");
     // if (specificConfig.body instanceof FormData) {
     //   let index = 0;
     //   specificConfig.body.forEach((value: string, key: string) => {

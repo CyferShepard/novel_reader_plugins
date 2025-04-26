@@ -2,9 +2,21 @@ import { ScraperQuery, ScraperPayload, ScraperRegex } from "../../classes/api-pa
 
 const details: ScraperPayload = new ScraperPayload({
   url: "https://novelbuddy.io${0}",
+  waitForPageLoad: true,
   query: [
     new ScraperQuery({ label: "url" }),
-    new ScraperQuery({ label: "cover", element: ".cover>.img-cover>img", withHref: true }),
+    new ScraperQuery({
+      label: "cover",
+      element: ".cover>.img-cover>img",
+      withHref: true,
+      transformProcess: (value) => {
+        if (value.startsWith("//")) {
+          return "https:" + value;
+        } else {
+          return value;
+        }
+      },
+    }),
     new ScraperQuery({ label: "title", element: ".detail>.name.box>h1" }),
     new ScraperQuery({ label: "summary", element: ".summary>p" }),
     new ScraperQuery({ label: "tags", element: ".tags>a" }),

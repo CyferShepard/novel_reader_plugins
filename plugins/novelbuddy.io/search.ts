@@ -2,6 +2,7 @@ import { ScraperQuery, ScraperPayload } from "../../classes/api-parser.ts";
 
 const search: ScraperPayload = new ScraperPayload({
   url: "https://novelbuddy.io/search?q=${0}",
+  waitForElement: ".book-detailed-item>.thumb>a>img",
   query: [
     new ScraperQuery({
       label: "results",
@@ -12,11 +13,11 @@ const search: ScraperPayload = new ScraperPayload({
         new ScraperQuery({ label: "summary", element: ".meta>.summary>p" }),
         new ScraperQuery({
           label: "cover",
-          element: ".meta>.title>h3>a",
+          element: ".book-detailed-item>.thumb>a>img",
           withHref: true,
           transformProcess: (value) => {
-            if (value.startsWith("/novel")) {
-              return "https://static.novelbuddy.com/images" + value.replace("/novel", "") + ".webp";
+            if (value.startsWith("//")) {
+              return "https:" + value;
             } else {
               return value;
             }
