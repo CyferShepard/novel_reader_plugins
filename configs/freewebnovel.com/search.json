@@ -3,6 +3,7 @@
   "type": "POST",
   "body": "searchkey=searchterm",
   "bodyType": "FORM_DATA",
+  "waitForPageLoad": false,
   "query": [
     {
       "label": "results",
@@ -13,30 +14,26 @@
         {
           "label": "url",
           "element": ".tit>a",
-          "getContent": true,
-          "withHref": true,
-          "selectItemsAtIndex": []
+          "getContent": false,
+          "withHref": true
         },
         {
           "label": "title",
           "element": ".tit>a",
           "getContent": true,
           "withHref": false,
-          "dataProp": "title",
-          "selectItemsAtIndex": []
+          "dataProp": "title"
         },
         {
           "label": "summary",
           "getContent": true,
-          "withHref": false,
-          "selectItemsAtIndex": []
+          "withHref": false
         },
         {
           "label": "cover",
           "element": ".pic>a>img",
-          "getContent": true,
+          "getContent": false,
           "withHref": true,
-          "selectItemsAtIndex": [],
           "transformProcess": "(value)=>{\n            if (value.startsWith(\"/files\")) {\n              return \"https://freewebnovel.com\" + value;\n            } else {\n              return value;\n            }\n          }"
         },
         {
@@ -49,8 +46,7 @@
             1
           ]
         }
-      ],
-      "selectItemsAtIndex": []
+      ]
     }
   ]
 }
