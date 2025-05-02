@@ -1,0 +1,15 @@
+{
+  "url": "https://warframe.fandom.com/wiki/Entrati#Ranks",
+  "type": "GET",
+  "bodyType": "JSON",
+  "waitForPageLoad": false,
+  "waitForElement": "",
+  "query": [
+    {
+      "label": "table",
+      "element": "tbody>p",
+      "getContent": true,
+      "withHref": false
+    }
+  ]
+}
