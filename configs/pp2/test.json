@@ -1,5 +1,5 @@
 {
-  "url": "https://warframe.fandom.com/wiki/Entrati#Ranks",
+  "url": "https://yts.mx",
   "type": "GET",
   "bodyType": "JSON",
   "waitForPageLoad": false,
@@ -7,9 +7,54 @@
   "query": [
     {
       "label": "table",
-      "element": "tbody>p",
-      "getContent": true,
-      "withHref": false
+      "element": "#popular-downloads>.row>.browse-movie-wrap",
+      "getContent": false,
+      "withHref": false,
+      "dataProp": "",
+      "subQuery": [
+        {
+          "label": "link",
+          "element": "a",
+          "getContent": false,
+          "withHref": true,
+          "selectItemsAtIndex": [
+            0
+          ]
+        },
+        {
+          "label": "image",
+          "element": "img",
+          "getContent": false,
+          "withHref": true,
+          "transformProcess": "(value)=>{\n            if (value.startsWith(\"/\")) {\n              return \"https://img.yts.mx\" + value;\n            }  \n          return value;\n}"
+        },
+        {
+          "label": "title",
+          "element": "img",
+          "getContent": true,
+          "withHref": false,
+          "dataProp": "alt"
+        },
+        {
+          "label": "rating",
+          "element": "figcaption>h4",
+          "getContent": true,
+          "withHref": false,
+          "selectItemsAtIndex": [
+            0
+          ]
+        },
+        {
+          "label": "genres",
+          "element": "figcaption>h4",
+          "getContent": true,
+          "withHref": false,
+          "selectItemsAtIndex": [
+            1,
+            2
+          ]
+        }
+      ]
     }
   ]
 }
