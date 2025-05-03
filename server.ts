@@ -381,8 +381,22 @@ router.post("/parse", async (context) => {
 
   await parseQuery(ScraperPayload.fromJson(payload)).then((response) => {
     if (response) {
-      console.log(response.toJson());
-      context.response.body = response.toJson();
+      const responseBody = response.toJson();
+      if (
+        responseBody.results &&
+        Array.isArray(responseBody.results) &&
+        responseBody.results.length === 1 &&
+        Object.keys(responseBody.results[0]).length === 1 &&
+        Object.keys(responseBody.results[0])[0] === "results"
+      ) {
+        // Replace the "results" field with the value of the single JSON object
+        const singleResult = responseBody.results[0];
+        const firstKey = Object.keys(singleResult)[0];
+        responseBody.results = singleResult[firstKey];
+      }
+      console.log(responseBody);
+
+      context.response.body = responseBody;
     } else {
       console.error("Failed to parse response");
       context.response.status = 500;
