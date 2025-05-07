@@ -6,8 +6,8 @@
   "waitForElement": "",
   "query": [
     {
-      "label": "table",
-      "element": "#popular-downloads>.row>.browse-movie-wrap",
+      "label": "results",
+      "element": ".row>.browse-movie-wrap",
       "getContent": false,
       "withHref": false,
       "dataProp": "",
@@ -23,36 +23,35 @@
         },
         {
           "label": "image",
-          "element": "img",
+          "element": "figure>img",
           "getContent": false,
           "withHref": true,
-          "transformProcess": "(value)=>{\n            if (value.startsWith(\"/\")) {\n              return \"https://img.yts.mx\" + value;\n            }  \n          return value;\n}"
+          "selectItemsAtIndex": [
+            0
+          ],
+          "transformProcess": "(value)=>{\n            if (typeof value == \"string\" && value.startsWith(\"/\")) {\n              return \"https://img.yts.mx\" + value;\n            }  \n          return value;\n}"
         },
         {
           "label": "title",
           "element": "img",
           "getContent": true,
           "withHref": false,
-          "dataProp": "alt"
-        },
-        {
-          "label": "rating",
-          "element": "figcaption>h4",
-          "getContent": true,
-          "withHref": false,
+          "dataProp": "alt",
           "selectItemsAtIndex": [
             0
           ]
         },
         {
-          "label": "genres",
-          "element": "figcaption>h4",
+          "label": "rating",
+          "element": "figcaption>h4.rating",
           "getContent": true,
-          "withHref": false,
-          "selectItemsAtIndex": [
-            1,
-            2
-          ]
+          "withHref": false
+        },
+        {
+          "label": "genres",
+          "element": "figcaption>h4:not(.rating)",
+          "getContent": true,
+          "withHref": false
         }
       ]
     }

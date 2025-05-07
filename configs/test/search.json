@@ -1,0 +1,30 @@
+{
+  "url": "https://www.pornpics.com/?q=ava+addams+feet",
+  "type": "GET",
+  "bodyType": "JSON",
+  "waitForPageLoad": false,
+  "waitForElement": ".wookmark-initialised",
+  "query": [
+    {
+      "label": "results",
+      "element": ".thumbwook",
+      "getContent": false,
+      "withHref": false,
+      "subQuery": [
+        {
+          "label": "url",
+          "element": "a",
+          "getContent": false,
+          "withHref": true
+        },
+        {
+          "label": "title",
+          "element": "a",
+          "getContent": true,
+          "withHref": false,
+          "dataProp": "title"
+        }
+      ]
+    }
+  ]
+}
