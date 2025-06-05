@@ -1,22 +1,20 @@
 {
   "url": "https://novgo.net${0}",
   "type": "GET",
-  "body": "",
   "bodyType": "JSON",
+  "waitForPageLoad": false,
   "query": [
     {
       "label": "url",
       "element": ".pagination>li.active>a",
       "getContent": true,
-      "withHref": true,
-      "selectItemsAtIndex": []
+      "withHref": true
     },
     {
       "label": "cover",
       "element": ".books>.book>img",
       "getContent": true,
       "withHref": true,
-      "selectItemsAtIndex": [],
       "transformProcess": "(value)=>{\n        if (value.startsWith(\"/uploads\")) {\n          return \"https://novgo.net\" + value;\n        } else {\n          return value;\n        }\n      }"
     },
     {
@@ -32,17 +30,15 @@
       "label": "summary",
       "element": ".desc-text>p",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
       "label": "tags",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
-      "label": "Author",
+      "label": "author",
       "element": ".info>div>a",
       "getContent": true,
       "withHref": false,
@@ -51,7 +47,7 @@
       ]
     },
     {
-      "label": "Status",
+      "label": "status",
       "element": ".info>div",
       "getContent": true,
       "withHref": false,
@@ -64,7 +60,7 @@
       }
     },
     {
-      "label": "Genres",
+      "label": "genres",
       "element": ".info>div",
       "getContent": true,
       "withHref": false,
@@ -78,16 +74,14 @@
       "transformProcess": "(value)=>{\n        if (value.startsWith(\"/\")) {\n          return \"https://novgo.net\" + value;\n        } else {\n          return value;\n        }\n      }"
     },
     {
-      "label": "Chapters",
+      "label": "chapters",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
-      "label": "LastUpdate",
+      "label": "lastUpdate",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     }
   ]
 }

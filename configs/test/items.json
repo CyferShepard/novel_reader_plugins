@@ -18,18 +18,21 @@
           "withHref": true
         },
         {
-          "label": "title",
-          "element": "a>img",
-          "getContent": true,
-          "withHref": false,
-          "dataProp": "alt"
-        },
-        {
           "label": "url",
           "element": "a",
           "getContent": false,
           "withHref": true
         }
+      ]
+    },
+    {
+      "label": "albumn_title",
+      "element": ".thumbwook>a>img",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "alt",
+      "selectItemsAtIndex": [
+        0
       ]
     }
   ]

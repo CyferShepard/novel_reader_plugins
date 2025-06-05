@@ -59,6 +59,87 @@ async function getProjectFiles(project: string) {
   }
 }
 
+async function getProjectConfigs(project: string) {
+  try {
+    const projectDir = `./configs/${project}`;
+
+    // Check if directory exists
+    try {
+      const dirInfo = await Deno.stat(projectDir);
+      if (!dirInfo.isDirectory) {
+        throw new Error("Project path is not a directory");
+      }
+    } catch (error) {
+      if (error instanceof Deno.errors.NotFound) {
+        throw new Error("Project directory not found");
+      }
+    }
+
+    // Read and process all TypeScript files in the project directory
+    const result = [];
+
+    for await (const entry of Deno.readDir(projectDir)) {
+      if (entry.isFile && entry.name.endsWith(".json")) {
+        try {
+          // Get the file name without extension
+          const fileName = entry.name.replace(/\.json$/, "");
+
+          // Read and parse the JSON file
+          const filePath = `${projectDir}/${entry.name}`;
+          const fileContent = await Deno.readTextFile(filePath);
+          let jsonData = {};
+          try {
+            jsonData = JSON.parse(fileContent);
+          } catch (parseErr) {
+            console.error(`Error parsing JSON in file ${entry.name}:`, parseErr);
+            jsonData = { error: "Invalid JSON" };
+          }
+
+          // Add to result array as {name, config}
+          result.push({
+            name: fileName,
+            config: jsonData,
+          });
+        } catch (fileErr) {
+          console.error(`Error processing file ${entry.name}:`, fileErr);
+          result.push({
+            name: entry.name.replace(/\.json$/, ""),
+            error: `Failed to process: ${fileErr instanceof Error ? fileErr.message : "Unknown error"}`,
+          });
+        }
+      }
+      // if (entry.isFile && entry.name.endsWith(".json")) {
+      //   try {
+      //     // Get the file name without extension
+      //     const fileName = entry.name.replace(/\.json$/, "");
+
+      //     // // Read and parse the JSON file
+      //     // const filePath = `${projectDir}/${entry.name}`;
+      //     // const fileContent = await Deno.readTextFile(filePath);
+      //     // const jsonData = JSON.parse(fileContent);
+
+      //     // Add to result array
+      //     result.push(fileName);
+      //   } catch (fileErr) {
+      //     console.error(`Error processing file ${entry.name}:`, fileErr);
+      //     result.push({
+      //       name: entry.name.replace(/\.json$/, ""),
+      //       error: `Failed to process: ${fileErr instanceof Error ? fileErr.message : "Unknown error"}`,
+      //     });
+      //   }
+      // }
+    }
+
+    return {
+      project: project,
+      files: result,
+    };
+  } catch (e) {
+    console.error(e);
+    throw new Error(`Failed to read project files: ${(e as Error).toString()}`);
+  }
+}
+
 // CORS Middleware
 function cors(ctx: any, next: any) {
   ctx.response.headers.set("Access-Control-Allow-Origin", "*"); // Allow all origins
@@ -75,7 +156,12 @@ function cors(ctx: any, next: any) {
 
 router.get("/:path*", async (context, next) => {
   const filePath = context.params.path || "index.html"; // Default to "index.html" if no file is specified
-  if (filePath.startsWith("projects") || filePath.startsWith("parse") || filePath.startsWith("editprojects")) {
+  if (
+    filePath.startsWith("projects") ||
+    filePath.startsWith("configs") ||
+    filePath.startsWith("parse") ||
+    filePath.startsWith("editprojects")
+  ) {
     await next();
   }
   try {
@@ -112,12 +198,64 @@ router.get("/projects", async (context) => {
 
     // Read all entries in the configs directory
     for await (const entry of Deno.readDir(configsDir)) {
+      // if (entry.isDirectory) {
+      //   entries.push(entry.name);
+      // }
       if (entry.isDirectory) {
         entries.push(entry.name);
       }
     }
 
     context.response.body = entries;
+  } catch (e) {
+    console.error(e);
+    context.response.status = 500;
+    context.response.body = { error: (e as Error).toString() };
+  }
+});
+
+router.get("/projects/:project/icon", async (context) => {
+  const project = context.params.project;
+  if (!project) {
+    context.response.status = 400;
+    context.response.body = { error: "Project name is required" };
+    return;
+  }
+
+  try {
+    const projectDir = `./configs/${project}`;
+    // Check if directory exists
+    try {
+      const dirInfo = await Deno.stat(projectDir);
+      if (!dirInfo.isDirectory) {
+        throw new Error("Project path is not a directory");
+      }
+    } catch (error) {
+      if (error instanceof Deno.errors.NotFound) {
+        context.response.status = 404;
+        context.response.body = { error: "Project directory not found" };
+        return;
+      } else {
+        throw error;
+      }
+    }
+
+    // Look for icon files in the project directory
+    let iconFile: string | null = null;
+    for await (const entry of Deno.readDir(projectDir)) {
+      if (entry.isFile && (entry.name.endsWith(".ico") || entry.name.endsWith(".png"))) {
+        iconFile = `${projectDir}/${entry.name}`;
+        break; // Use the first icon found
+      }
+    }
+
+    if (iconFile) {
+      context.response.headers.set("Content-Type", "image/png"); // Set appropriate content type
+      await send(context, iconFile);
+    } else {
+      context.response.status = 404;
+      context.response.body = { error: "Icon file not found" };
+    }
   } catch (e) {
     console.error(e);
     context.response.status = 500;
@@ -235,6 +373,23 @@ router.get("/projects/:project", async (context) => {
   }
 });
 
+router.get("/configs/:project", async (context) => {
+  const project = context.params.project;
+  if (!project) {
+    context.response.status = 400;
+    context.response.body = { error: "Project name is required" };
+    return;
+  }
+
+  try {
+    const projectFiles = await getProjectConfigs(project);
+    context.response.body = projectFiles;
+  } catch (e) {
+    console.error(e);
+    context.response.status = 500;
+    context.response.body = { error: (e as Error).toString() };
+  }
+});
 // Add this endpoint to your existing router
 router.post("/projects/:project/:filename", async (context) => {
   const project = context.params.project;
