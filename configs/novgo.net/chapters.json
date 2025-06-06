@@ -1,8 +1,8 @@
 {
   "url": "https://novgo.net${0}?page=${1}",
   "type": "GET",
-  "body": "",
   "bodyType": "JSON",
+  "waitForPageLoad": false,
   "query": [
     {
       "label": "chapters",
@@ -14,8 +14,7 @@
           "label": "url",
           "element": "a",
           "getContent": true,
-          "withHref": true,
-          "selectItemsAtIndex": []
+          "withHref": true
         },
         {
           "label": "index",
@@ -23,9 +22,8 @@
           "getContent": true,
           "withHref": false,
           "dataProp": "title",
-          "selectItemsAtIndex": [],
           "regex": {
-            "regex": "Chapter\\s+(\\d+)",
+            "regex": "(?:Chapter\\s+)?(\\d+)",
             "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
           }
         },
@@ -34,17 +32,14 @@
           "element": "a",
           "getContent": true,
           "withHref": false,
-          "dataProp": "title",
-          "selectItemsAtIndex": []
+          "dataProp": "title"
         },
         {
           "label": "date",
           "getContent": true,
-          "withHref": false,
-          "selectItemsAtIndex": []
+          "withHref": false
         }
-      ],
-      "selectItemsAtIndex": []
+      ]
     },
     {
       "label": "CurentPage",
@@ -52,7 +47,6 @@
       "getContent": true,
       "withHref": false,
       "dataProp": "data-page",
-      "selectItemsAtIndex": [],
       "transformProcess": "(value)=>parseInt(value) + 1"
     },
     {
@@ -61,7 +55,6 @@
       "getContent": true,
       "withHref": false,
       "dataProp": "data-page",
-      "selectItemsAtIndex": [],
       "transformProcess": "(value)=>parseInt(value) + 1"
     }
   ]
