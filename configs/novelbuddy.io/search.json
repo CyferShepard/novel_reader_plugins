@@ -36,7 +36,8 @@
           "dataProp": "data-source",
           "regex": {
             "process": ""
-          }
+          },
+          "transformProcess": "(value)=>{\n            if (value.startsWith(\"//\")) {\n              return \"https:\"+ value;\n            } else {\n              return value;\n            }\n          }"
         },
         {
           "label": "genres",
