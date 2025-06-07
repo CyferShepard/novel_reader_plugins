@@ -1,8 +1,9 @@
 {
   "url": "https://freewebnovel.com${0}",
   "type": "GET",
-  "body": "",
   "bodyType": "JSON",
+  "waitForPageLoad": false,
+  "waitDuration": 5000,
   "query": [
     {
       "label": "url",
@@ -18,7 +19,6 @@
       "element": ".m-imgtxt>.pic>img",
       "getContent": true,
       "withHref": true,
-      "selectItemsAtIndex": [],
       "transformProcess": "(value)=>{\n        if (value.startsWith(\"/files\")) {\n          return \"https://freewebnovel.com\" + value;\n        } else {\n          return value;\n        }\n      }"
     },
     {
@@ -34,17 +34,15 @@
       "label": "summary",
       "element": ".m-desc>.txt>.inner",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
       "label": "tags",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
-      "label": "Author",
+      "label": "author",
       "element": ".m-imgtxt>.txt>.item>.right",
       "getContent": true,
       "withHref": false,
@@ -53,14 +51,13 @@
       ]
     },
     {
-      "label": "Status",
+      "label": "status",
       "element": ".m-imgtxt>.txt>.item>.right>.s1.s2",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
-      "label": "Genres",
+      "label": "genres",
       "element": ".m-imgtxt>.txt>.item>.right",
       "getContent": true,
       "withHref": false,
@@ -70,16 +67,14 @@
       "transformProcess": "(value)=>value.split(\",\")"
     },
     {
-      "label": "Chapters",
+      "label": "chapters",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
-      "label": "LastUpdate",
+      "label": "lastUpdate",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     }
   ]
 }
