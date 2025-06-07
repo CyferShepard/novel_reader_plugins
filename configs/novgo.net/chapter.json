@@ -18,14 +18,14 @@
       "withHref": true
     },
     {
-      "label": "chapter_title",
+      "label": "title",
       "element": ".chapter-title",
       "getContent": true,
       "withHref": false,
       "dataProp": "title"
     },
     {
-      "label": "chapter",
+      "label": "content",
       "element": "#chapter-content",
       "getContent": true,
       "withHref": false

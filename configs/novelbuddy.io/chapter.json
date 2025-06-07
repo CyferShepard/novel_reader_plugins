@@ -1,50 +1,44 @@
 {
   "url": "https://novelbuddy.io${0}",
   "type": "GET",
-  "body": "",
   "bodyType": "JSON",
+  "waitForPageLoad": false,
   "query": [
     {
       "label": "novel_title",
       "element": ".chapter-info>h2>a",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
       "label": "novel_url",
       "element": ".chapter-info>h2>a",
       "getContent": true,
-      "withHref": true,
-      "selectItemsAtIndex": []
+      "withHref": true
     },
     {
-      "label": "chapter_title",
+      "label": "title",
       "element": "#chapter__content>h1",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
-      "label": "chapter",
+      "label": "content",
       "element": ".content-inner>p",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
       "label": "PreviousPage",
       "element": "#btn-prev",
       "getContent": true,
-      "withHref": true,
-      "selectItemsAtIndex": []
+      "withHref": true
     },
     {
       "label": "NextPage",
       "element": "#btn-next",
       "getContent": true,
-      "withHref": true,
-      "selectItemsAtIndex": []
+      "withHref": true
     }
   ]
 }

@@ -1,44 +1,39 @@
 {
   "url": "https://freewebnovel.com${0}",
   "type": "GET",
-  "body": "",
   "bodyType": "JSON",
+  "waitForPageLoad": false,
   "query": [
     {
       "label": "novel_title",
       "element": ".tit>a",
       "getContent": true,
       "withHref": false,
-      "dataProp": "title",
-      "selectItemsAtIndex": []
+      "dataProp": "title"
     },
     {
       "label": "novel_url",
       "element": ".tit>a",
       "getContent": true,
-      "withHref": true,
-      "selectItemsAtIndex": []
+      "withHref": true
     },
     {
-      "label": "chapter_title",
+      "label": "title",
       "element": ".chapter",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
-      "label": "chapter",
+      "label": "content",
       "element": "#article",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
       "label": "PreviousPage",
       "element": "#prev_url",
       "getContent": true,
       "withHref": true,
-      "selectItemsAtIndex": [],
       "transformProcess": "(value)=>value.split(\"/\").length - 1 > 2 ? value : \"\""
     },
     {
@@ -46,7 +41,6 @@
       "element": "#next_url",
       "getContent": true,
       "withHref": true,
-      "selectItemsAtIndex": [],
       "transformProcess": "(value)=>value.split(\"/\").length - 1 > 2 ? value : \"\""
     }
   ]
