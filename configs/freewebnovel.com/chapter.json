@@ -3,6 +3,7 @@
   "type": "GET",
   "bodyType": "JSON",
   "waitForPageLoad": false,
+  "waitDuration": 5000,
   "query": [
     {
       "label": "novel_title",
@@ -42,6 +43,12 @@
       "getContent": true,
       "withHref": true,
       "transformProcess": "(value)=>value.split(\"/\").length - 1 > 2 ? value : \"\""
+    },
+    {
+      "label": "url",
+      "element": "h1.tit>a",
+      "getContent": false,
+      "withHref": true
     }
   ]
 }
