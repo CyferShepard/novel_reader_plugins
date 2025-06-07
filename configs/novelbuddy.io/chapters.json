@@ -1,8 +1,9 @@
 {
-  "url": "https://novelbuddy.io/api/manga${0}/chapters?source=detail",
+  "url": "https://novelbuddy.io/api/manga/${BookId}/chapters?source=detail",
   "type": "GET",
-  "body": "",
   "bodyType": "JSON",
+  "waitForPageLoad": false,
+  "waitDuration": 5000,
   "query": [
     {
       "label": "chapters",
@@ -14,15 +15,13 @@
           "label": "url",
           "element": "a",
           "getContent": true,
-          "withHref": true,
-          "selectItemsAtIndex": []
+          "withHref": true
         },
         {
           "label": "index",
           "element": ".chapter-title",
           "getContent": true,
           "withHref": false,
-          "selectItemsAtIndex": [],
           "regex": {
             "regex": "C\\.+(\\d+)",
             "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
@@ -32,30 +31,25 @@
           "label": "title",
           "element": ".chapter-title",
           "getContent": true,
-          "withHref": false,
-          "selectItemsAtIndex": []
+          "withHref": false
         },
         {
           "label": "date",
           "element": ".chapter-update",
           "getContent": true,
-          "withHref": false,
-          "selectItemsAtIndex": []
+          "withHref": false
         }
-      ],
-      "selectItemsAtIndex": []
+      ]
     },
     {
       "label": "CurentPage",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
       "label": "LastPage",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     }
   ]
 }
