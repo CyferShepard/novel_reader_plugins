@@ -1,42 +1,39 @@
 {
   "url": "https://novelbuddy.io${0}",
   "type": "GET",
-  "body": "",
   "bodyType": "JSON",
+  "waitForPageLoad": true,
+  "waitDuration": 100,
   "query": [
     {
       "label": "url",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
       "label": "cover",
       "element": ".cover>.img-cover>img",
       "getContent": true,
       "withHref": true,
-      "selectItemsAtIndex": []
+      "transformProcess": "(value)=>{\n            if (value.startsWith(\"//\")) {\n              return \"https:\"+ value;\n            } else {\n              return value;\n            }\n          }"
     },
     {
       "label": "title",
       "element": ".detail>.name.box>h1",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
       "label": "summary",
       "element": ".summary>p",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
       "label": "tags",
       "element": ".tags>a",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
       "label": "Author",
@@ -106,8 +103,7 @@
             "process": "(match)=>match ? match[1] : null"
           }
         }
-      ],
-      "selectItemsAtIndex": []
+      ]
     }
   ]
 }
