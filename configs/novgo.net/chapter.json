@@ -27,7 +27,7 @@
     },
     {
       "label": "content",
-      "element": "#chapter-content",
+      "element": "#chapter-content>p",
       "getContent": true,
       "withHref": false
     },
