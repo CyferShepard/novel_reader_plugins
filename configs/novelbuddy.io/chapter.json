@@ -6,13 +6,13 @@
   "waitDuration": 5000,
   "query": [
     {
-      "label": "novel_title",
+      "label": "novelTitle",
       "element": ".chapter-info>h2>a",
       "getContent": true,
       "withHref": false
     },
     {
-      "label": "novel_url",
+      "label": "novelUrl",
       "element": ".chapter-info>h2>a",
       "getContent": true,
       "withHref": true
@@ -30,13 +30,13 @@
       "withHref": false
     },
     {
-      "label": "PreviousPage",
+      "label": "previousPage",
       "element": "#btn-prev",
       "getContent": true,
       "withHref": true
     },
     {
-      "label": "NextPage",
+      "label": "nextPage",
       "element": "#btn-next",
       "getContent": true,
       "withHref": true

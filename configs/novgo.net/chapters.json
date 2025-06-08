@@ -3,6 +3,7 @@
   "type": "GET",
   "bodyType": "JSON",
   "waitForPageLoad": false,
+  "waitDuration": 5000,
   "query": [
     {
       "label": "chapters",
@@ -42,7 +43,7 @@
       ]
     },
     {
-      "label": "CurentPage",
+      "label": "curentPage",
       "element": ".pagination>li.active>a",
       "getContent": true,
       "withHref": false,
@@ -50,7 +51,7 @@
       "transformProcess": "(value)=>parseInt(value) + 1"
     },
     {
-      "label": "LastPage",
+      "label": "lastPage",
       "element": ".last>a",
       "getContent": true,
       "withHref": false,

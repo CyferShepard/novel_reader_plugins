@@ -42,12 +42,12 @@
       ]
     },
     {
-      "label": "CurentPage",
+      "label": "curentPage",
       "getContent": true,
       "withHref": false
     },
     {
-      "label": "LastPage",
+      "label": "lastPage",
       "getContent": true,
       "withHref": false
     }

@@ -6,14 +6,14 @@
   "waitDuration": 5000,
   "query": [
     {
-      "label": "novel_title",
+      "label": "novelTitle",
       "element": ".tit>a",
       "getContent": true,
       "withHref": false,
       "dataProp": "title"
     },
     {
-      "label": "novel_url",
+      "label": "novelUrl",
       "element": ".tit>a",
       "getContent": true,
       "withHref": true
@@ -31,14 +31,14 @@
       "withHref": false
     },
     {
-      "label": "PreviousPage",
+      "label": "previousPage",
       "element": "#prev_url",
       "getContent": true,
       "withHref": true,
       "transformProcess": "(value)=>value.split(\"/\").length - 1 > 2 ? value : \"\""
     },
     {
-      "label": "NextPage",
+      "label": "nextPage",
       "element": "#next_url",
       "getContent": true,
       "withHref": true,

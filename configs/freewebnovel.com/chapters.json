@@ -1,8 +1,9 @@
 {
   "url": "https://freewebnovel.com${0}",
   "type": "GET",
-  "body": "",
   "bodyType": "JSON",
+  "waitForPageLoad": false,
+  "waitDuration": 5000,
   "query": [
     {
       "label": "chapters",
@@ -14,8 +15,7 @@
           "label": "url",
           "element": "a",
           "getContent": true,
-          "withHref": true,
-          "selectItemsAtIndex": []
+          "withHref": true
         },
         {
           "label": "index",
@@ -23,7 +23,6 @@
           "getContent": true,
           "withHref": false,
           "dataProp": "title",
-          "selectItemsAtIndex": [],
           "regex": {
             "regex": "Chapter\\s+(\\d+)",
             "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
@@ -34,29 +33,24 @@
           "element": "a",
           "getContent": true,
           "withHref": false,
-          "dataProp": "title",
-          "selectItemsAtIndex": []
+          "dataProp": "title"
         },
         {
           "label": "date",
           "getContent": true,
-          "withHref": false,
-          "selectItemsAtIndex": []
+          "withHref": false
         }
-      ],
-      "selectItemsAtIndex": []
+      ]
     },
     {
-      "label": "CurentPage",
+      "label": "curentPage",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     },
     {
-      "label": "LastPage",
+      "label": "lastPage",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": []
+      "withHref": false
     }
   ]
 }
