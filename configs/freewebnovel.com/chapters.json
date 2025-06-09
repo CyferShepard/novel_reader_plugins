@@ -20,11 +20,10 @@
         {
           "label": "index",
           "element": "a",
-          "getContent": true,
-          "withHref": false,
-          "dataProp": "title",
+          "getContent": false,
+          "withHref": true,
           "regex": {
-            "regex": "Chapter\\s+(\\d+)",
+            "regex": "chapter-(\\d+)",
             "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
           }
         },
