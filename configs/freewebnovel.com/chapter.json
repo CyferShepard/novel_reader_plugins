@@ -46,9 +46,10 @@
     },
     {
       "label": "url",
-      "element": "h1.tit>a",
+      "element": ".cur>.wp>a",
       "getContent": false,
-      "withHref": true
+      "withHref": true,
+      "dataProp": "2"
     }
   ]
 }
