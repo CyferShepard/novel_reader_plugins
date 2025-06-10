@@ -49,7 +49,7 @@
       "element": ".cur>.wp>a",
       "getContent": false,
       "withHref": true,
-      "dataProp": "2"
+      "selectItemsAtIndex": [2]
     }
   ]
 }
