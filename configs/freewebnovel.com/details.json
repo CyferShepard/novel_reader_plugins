@@ -73,8 +73,13 @@
     },
     {
       "label": "lastUpdate",
+      "element": ".lastupdate",
       "getContent": true,
-      "withHref": false
+      "withHref": false,
+      "regex": {
+        "regex": "Updated\\s+([^\\]]+)",
+        "process": "(match)=>match && match.length >= 2 ? match[1] : null"
+      }
     }
   ]
 }
