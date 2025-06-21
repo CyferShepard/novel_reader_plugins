@@ -1,5 +1,5 @@
 {
-  "url": "https://freewebnovel.com/sort/latest-novel",
+  "url": "https://freewebnovel.com/sort/latest-novel/${0}",
   "type": "GET",
   "body": "searchkey=searchterm",
   "bodyType": "FORM_DATA",
