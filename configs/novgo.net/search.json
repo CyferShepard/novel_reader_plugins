@@ -1,8 +1,9 @@
 {
-  "url": "https://novgo.net/search?keyword=${0}",
+  "url": "https://novgo.net/search?keyword=${0}&page=${1}",
   "type": "GET",
   "bodyType": "JSON",
   "waitForPageLoad": false,
+  "waitDuration": 5000,
   "query": [
     {
       "label": "results",
@@ -46,6 +47,22 @@
           "withHref": false
         }
       ]
+    },
+    {
+      "label": "currentPage",
+      "element": ".pagination.pagination-sm>.active>a",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "data-page",
+      "finalTransformProcess": "(value) => (!isNaN(value) ? parseInt(value) + 1 : null)"
+    },
+    {
+      "label": "lastPage",
+      "element": ".pagination.pagination-sm>.last>a",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "data-page",
+      "finalTransformProcess": "(value) => (!isNaN(value) ? parseInt(value) + 1 : null)"
     }
   ]
 }

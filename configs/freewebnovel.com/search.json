@@ -41,10 +41,7 @@
           "element": ".txt>.desc>.item>.right>a",
           "getContent": true,
           "withHref": false,
-          "selectItemsAtIndex": [
-            0,
-            1
-          ]
+          "selectItemsAtIndex": [0, 1]
         },
         {
           "label": "chapterCount",
@@ -57,6 +54,20 @@
           }
         }
       ]
+    },
+    {
+      "label": "currentPage",
+      "element": ".pages>ul>li>strong",
+      "getContent": true,
+      "withHref": false,
+      "finalTransformProcess": "(value) => (!isNaN(value) ? parseInt(value) : null)"
+    },
+    {
+      "label": "lastPage",
+      "element": ".pages>ul>li>a",
+      "getContent": true,
+      "withHref": false,
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n      return  parseInt(value[value.length-1]);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     }
   ]
 }
