@@ -1,0 +1,108 @@
+{
+  "url": "${0}",
+  "type": "GET",
+  "bodyType": "JSON",
+  "waitForPageLoad": false,
+  "waitDuration": 100,
+  "query": [
+    {
+      "label": "url",
+      "element": "li>h1>a",
+      "getContent": false,
+      "withHref": true
+    },
+    {
+      "label": "cover",
+      "element": ".books>.book>.lazy",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "data-src"
+    },
+    {
+      "label": "title",
+      "element": ".title",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        0
+      ]
+    },
+    {
+      "label": "summary",
+      "element": ".desc-text>p",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "tags",
+      "element": ".tag-container>a",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "author",
+      "element": ".info.info-meta>li>a",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        0
+      ]
+    },
+    {
+      "label": "status",
+      "element": ".info.info-meta>li",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        2
+      ],
+      "regex": {
+        "regex": "Status:\\s*([^<]+)",
+        "process": "(match)=>match ? match[match.length - 1] : null"
+      }
+    },
+    {
+      "label": "genres",
+      "element": ".info.info-meta>li",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        1
+      ],
+      "regex": {
+        "regex": "^Genre:\\s*",
+        "process": "(match)=>match?.input?.replace(match[0], \"\") ?? \"\""
+      }
+    },
+    {
+      "label": "chapters",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "lastUpdate",
+      "element": ".l-chapter>div>.item-time",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "additionalProps",
+      "element": "#tab-comment",
+      "getContent": true,
+      "withHref": false,
+      "subQuery": [
+        {
+          "label": "NovelId",
+          "element": "script",
+          "getContent": false,
+          "withHref": false,
+          "dataProp": "",
+          "regex": {
+            "regex": "const\\s+novelId\\s*=\\s*\"([^\"]+)\"",
+            "process": "(match)=>match ? match[1] : match"
+          }
+        }
+      ]
+    }
+  ]
+}
