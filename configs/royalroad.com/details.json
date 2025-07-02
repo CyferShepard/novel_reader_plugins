@@ -27,7 +27,7 @@
     },
     {
       "label": "summary",
-      "element": ".description>div>p",
+      "element": ".description>div",
       "getContent": true,
       "withHref": false
     },
