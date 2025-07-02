@@ -1,0 +1,69 @@
+{
+  "url": "https://www.royalroad.com${0}",
+  "type": "GET",
+  "bodyType": "JSON",
+  "waitForPageLoad": false,
+  "waitDuration": 5000,
+  "query": [
+    {
+      "label": "chapters",
+      "element": ".chapter-row",
+      "getContent": true,
+      "withHref": false,
+      "subQuery": [
+        {
+          "label": "url",
+          "element": "a",
+          "getContent": false,
+          "withHref": true,
+          "dataProp": "",
+          "selectItemsAtIndex": [
+            0
+          ]
+        },
+        {
+          "label": "index",
+          "element": "a",
+          "getContent": true,
+          "withHref": false,
+          "dataProp": "data-content",
+          "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n      return  parseInt(value);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
+        },
+        {
+          "label": "title",
+          "element": "a",
+          "getContent": true,
+          "withHref": false,
+          "dataProp": "",
+          "selectItemsAtIndex": [
+            0
+          ]
+        },
+        {
+          "label": "date",
+          "element": "a",
+          "getContent": true,
+          "withHref": false,
+          "dataProp": "",
+          "selectItemsAtIndex": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "label": "curentPage",
+      "element": "",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": ""
+    },
+    {
+      "label": "lastPage",
+      "element": "",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": ""
+    }
+  ]
+}

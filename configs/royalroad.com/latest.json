@@ -1,0 +1,81 @@
+{
+  "url": "https://www.royalroad.com/fictions/latest-updates?page=${0}",
+  "type": "GET",
+  "bodyType": "JSON",
+  "waitForPageLoad": false,
+  "waitDuration": 5000,
+  "query": [
+    {
+      "label": "results",
+      "element": ".fiction-list-item",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "",
+      "subQuery": [
+        {
+          "label": "url",
+          "element": ".fiction-title>a",
+          "getContent": true,
+          "withHref": true
+        },
+        {
+          "label": "title",
+          "element": ".fiction-title>a",
+          "getContent": true,
+          "withHref": false
+        },
+        {
+          "label": "summary",
+          "getContent": true,
+          "withHref": false
+        },
+        {
+          "label": "cover",
+          "element": "img",
+          "getContent": true,
+          "withHref": true,
+          "transformProcess": "(value)=>{\n            if (value.startsWith(\"/\")) {\n              return \"https://novelbin.me\" + value.replace('/novel_200_89','/novel');\n            } else {\n              return value.replace('/novel_200_89','/novel');\n            }\n          }"
+        },
+        {
+          "label": "genres",
+          "element": ".margin-bottom-10>span>a",
+          "getContent": true,
+          "withHref": false
+        },
+        {
+          "label": "chapterCount",
+          "element": ".row.stats>div>span",
+          "getContent": true,
+          "withHref": false,
+          "selectItemsAtIndex": [
+            4
+          ],
+          "regex": {
+            "regex": "^(\\d+)",
+            "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
+          }
+        }
+      ]
+    },
+    {
+      "label": "currentPage",
+      "element": ".page-active>a",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "data-page",
+      "regex": {
+        "regex": "",
+        "process": ""
+      },
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n      return  parseInt(value[value.length-1]);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
+    },
+    {
+      "label": "lastPage",
+      "element": ".pagination>li>a",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "data-page",
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n      return  parseInt(value[value.length-1]);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
+    }
+  ]
+}

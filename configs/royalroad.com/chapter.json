@@ -1,0 +1,58 @@
+{
+  "url": "https://www.royalroad.com${0}",
+  "type": "GET",
+  "bodyType": "JSON",
+  "waitForPageLoad": false,
+  "waitDuration": 5000,
+  "query": [
+    {
+      "label": "novelTitle",
+      "element": "meta[property=\"og:title\"]",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "content"
+    },
+    {
+      "label": "novelUrl",
+      "element": ".fic-header>div>div.md-text-left>a",
+      "getContent": false,
+      "withHref": true,
+      "dataProp": "",
+      "selectItemsAtIndex": [
+        0
+      ]
+    },
+    {
+      "label": "title",
+      "element": ".fic-header>div>div>h1",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": ""
+    },
+    {
+      "label": "content",
+      "element": ".chapter-inner.chapter-content>p",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "previousPage",
+      "element": ".col-xs-6.col-md-4.col-lg-3.col-xl-2 > a",
+      "getContent": false,
+      "withHref": true
+    },
+    {
+      "label": "nextPage",
+      "element": ".col-xs-6.col-md-4.col-md-offset-4.col-lg-3.col-lg-offset-6>a",
+      "getContent": false,
+      "withHref": true
+    },
+    {
+      "label": "url",
+      "element": "input[name=\"returnUrl\"]",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "value"
+    }
+  ]
+}

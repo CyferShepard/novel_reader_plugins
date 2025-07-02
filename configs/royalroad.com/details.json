@@ -1,0 +1,82 @@
+{
+  "url": "https://www.royalroad.com${0}",
+  "type": "GET",
+  "bodyType": "JSON",
+  "waitForPageLoad": false,
+  "waitDuration": 100,
+  "query": [
+    {
+      "label": "url",
+      "element": "meta[property=\"og:url\"]",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "content"
+    },
+    {
+      "label": "cover",
+      "element": ".thumbnail",
+      "getContent": false,
+      "withHref": true,
+      "dataProp": ""
+    },
+    {
+      "label": "title",
+      "element": ".fic-title>div>h1",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "summary",
+      "element": ".description>div>p",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "tags",
+      "element": "",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "author",
+      "element": ".fic-title>div>h4>span>a",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "status",
+      "element": ".margin-bottom-10>.label",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "",
+      "selectItemsAtIndex": [
+        1
+      ],
+      "regex": {
+        "regex": "",
+        "process": ""
+      }
+    },
+    {
+      "label": "genres",
+      "element": ".tags>a",
+      "getContent": true,
+      "withHref": false,
+      "regex": {
+        "regex": "^Genre:\\s*",
+        "process": "(match)=>match?.input?.replace(match[0], \"\") ?? \"\""
+      }
+    },
+    {
+      "label": "chapters",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "lastUpdate",
+      "element": "",
+      "getContent": true,
+      "withHref": false
+    }
+  ]
+}
