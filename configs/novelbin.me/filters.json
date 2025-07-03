@@ -1,0 +1,12 @@
+{
+  "name": "novelbin.me",
+  "filters": [
+    {
+      "type": { "type": "main", "fieldOptions": [], "minValue": null, "maxValue": null, "defaultValue": null },
+      "isParameter": true,
+      "fieldName": "Keyword",
+      "fieldVar": "keyword",
+      "isMultiVar": false
+    }
+  ]
+}

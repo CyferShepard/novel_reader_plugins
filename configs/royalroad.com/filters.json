@@ -1,0 +1,216 @@
+{
+  "name": "royalroad.com",
+  "filters": [
+    {
+      "type": { "type": "main", "fieldOptions": [], "minValue": null, "maxValue": null, "defaultValue": null },
+      "isParameter": true,
+      "fieldName": "Keyword",
+      "fieldVar": "keyword",
+      "isMultiVar": false
+    },
+    {
+      "type": { "type": "text", "fieldOptions": [], "minValue": null, "maxValue": null, "defaultValue": null },
+      "isParameter": true,
+      "fieldName": "Title",
+      "fieldVar": "title",
+      "isMultiVar": false
+    },
+
+    {
+      "type": { "type": "text", "fieldOptions": [], "minValue": null, "maxValue": null, "defaultValue": null },
+      "isParameter": true,
+      "fieldName": "Author",
+      "fieldVar": "author",
+      "isMultiVar": false
+    },
+    {
+      "type": {
+        "type": "multiSelect",
+        "fieldOptions": [
+          { "name": "Action", "value": "action" },
+          { "name": "Adventure", "value": "adventure" },
+          { "name": "Comedy", "value": "comedy" },
+          { "name": "Contemporary", "value": "contemporary" },
+          { "name": "Drama", "value": "drama" },
+          { "name": "Fantasy", "value": "fantasy" },
+          { "name": "Historical", "value": "historical" },
+          { "name": "Horror", "value": "horror" },
+          { "name": "Mystery", "value": "mystery" },
+          { "name": "Psychological", "value": "psychological" },
+          { "name": "Romance", "value": "romance" },
+          { "name": "Satire", "value": "satire" },
+          { "name": "Sci Fi", "value": "sci_fi" },
+          { "name": "One Shot", "value": "one_shot" },
+          { "name": "Tragedy", "value": "tragedy" }
+        ],
+        "minValue": null,
+        "maxValue": null,
+        "defaultValue": null
+      },
+      "isParameter": true,
+      "fieldName": "Genres",
+      "fieldVar": "tagsAdd",
+      "isMultiVar": true
+    },
+    {
+      "type": {
+        "type": "multiSelect",
+        "fieldOptions": [
+          { "name": "Action", "value": "action" },
+          { "name": "Adventure", "value": "adventure" },
+          { "name": "Comedy", "value": "comedy" },
+          { "name": "Contemporary", "value": "contemporary" },
+          { "name": "Drama", "value": "drama" },
+          { "name": "Fantasy", "value": "fantasy" },
+          { "name": "Historical", "value": "historical" },
+          { "name": "Horror", "value": "horror" },
+          { "name": "Mystery", "value": "mystery" },
+          { "name": "Psychological", "value": "psychological" },
+          { "name": "Romance", "value": "romance" },
+          { "name": "Satire", "value": "satire" },
+          { "name": "Sci Fi", "value": "sci_fi" },
+          { "name": "One Shot", "value": "one_shot" },
+          { "name": "Tragedy", "value": "tragedy" }
+        ],
+        "minValue": null,
+        "maxValue": null,
+        "defaultValue": null
+      },
+      "isParameter": true,
+      "fieldName": "Exclude Genres",
+      "fieldVar": "tagsRemove",
+      "isMultiVar": true
+    },
+    {
+      "type": {
+        "type": "multiSelect",
+        "fieldOptions": [
+          { "name": "AI-Assisted Content", "value": "ai_assisted" },
+          { "name": "AI-Generated Content", "value": "ai_generated" },
+          { "name": "Graphic Violence", "value": "graphic_violence" },
+          { "name": "Profanity", "value": "profanity" },
+          { "name": "Sensitive Content", "value": "sensitive" },
+          { "name": "Sexual Content", "value": "sexuality" }
+        ],
+        "minValue": null,
+        "maxValue": null,
+        "defaultValue": null
+      },
+      "isParameter": true,
+      "fieldName": "Content Warnings",
+      "fieldVar": "tagsAdd",
+      "isMultiVar": true
+    },
+    {
+      "type": {
+        "type": "multiSelect",
+        "fieldOptions": [
+          { "name": "AI-Assisted Content", "value": "ai_assisted" },
+          { "name": "AI-Generated Content", "value": "ai_generated" },
+          { "name": "Graphic Violence", "value": "graphic_violence" },
+          { "name": "Profanity", "value": "profanity" },
+          { "name": "Sensitive Content", "value": "sensitive" },
+          { "name": "Sexual Content", "value": "sexuality" }
+        ],
+        "minValue": null,
+        "maxValue": null,
+        "defaultValue": null
+      },
+      "isParameter": true,
+      "fieldName": "Exclude Content Warnings",
+      "fieldVar": "tagsRemove",
+      "isMultiVar": true
+    },
+    {
+      "type": { "type": "numeric", "fieldOptions": [], "minValue": null, "maxValue": null, "defaultValue": null },
+      "isParameter": true,
+      "fieldName": "Pages (Min)",
+      "fieldVar": "minPages",
+      "isMultiVar": false
+    },
+    {
+      "type": { "type": "numeric", "fieldOptions": [], "minValue": null, "maxValue": null, "defaultValue": null },
+      "isParameter": true,
+      "fieldName": "Pages (Max)",
+      "fieldVar": "maxPages",
+      "isMultiVar": false
+    },
+    {
+      "type": {
+        "type": "dropdown",
+        "fieldOptions": [
+          { "name": "ALL", "value": "ALL" },
+          { "name": "COMPLETED", "value": "COMPLETED" },
+          { "name": "DROPPED", "value": "DROPPED" },
+          { "name": "ONGOING", "value": "ONGOING" },
+          { "name": "HIATUS", "value": "HIATUS" },
+          { "name": "STUB", "value": "STUB" }
+        ],
+        "minValue": null,
+        "maxValue": null,
+        "defaultValue": null
+      },
+      "isParameter": true,
+      "fieldName": "Status",
+      "fieldVar": "status",
+      "isMultiVar": false
+    },
+    {
+      "type": {
+        "type": "dropdown",
+        "fieldOptions": [
+          { "name": "Relevance", "value": "relevance" },
+          { "name": "Popularity", "value": "popularity" },
+          { "name": "Average Rating", "value": "rating" },
+          { "name": "Last Update", "value": "last_update" },
+          { "name": "Release Date", "value": "release_date" },
+          { "name": "Followers", "value": "followers" },
+          { "name": "Number of Pages", "value": "length" },
+          { "name": "Views", "value": "views" },
+          { "name": "Title", "value": "title" },
+          { "name": "Author", "value": "author" }
+        ],
+        "minValue": null,
+        "maxValue": null,
+        "defaultValue": null
+      },
+      "isParameter": true,
+      "fieldName": "Order By",
+      "fieldVar": "orderBy",
+      "isMultiVar": false
+    },
+    {
+      "type": {
+        "type": "dropdown",
+        "fieldOptions": [
+          { "name": "Ascending", "value": "asc" },
+          { "name": "Descending", "value": "desc" }
+        ],
+        "minValue": null,
+        "maxValue": null,
+        "defaultValue": null
+      },
+      "isParameter": true,
+      "fieldName": "Dir",
+      "fieldVar": "dir",
+      "isMultiVar": false
+    },
+    {
+      "type": {
+        "type": "dropdown",
+        "fieldOptions": [
+          { "name": "All", "value": "ALL" },
+          { "name": "Fan Fiction", "value": "fanfiction" },
+          { "name": "Original", "value": "original" }
+        ],
+        "minValue": null,
+        "maxValue": null,
+        "defaultValue": null
+      },
+      "isParameter": true,
+      "fieldName": "Type",
+      "fieldVar": "type",
+      "isMultiVar": false
+    }
+  ]
+}
