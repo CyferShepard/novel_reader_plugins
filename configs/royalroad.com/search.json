@@ -1,5 +1,5 @@
 {
-  "url": "https://www.royalroad.com/fictions/search?globalFilters=true&keyword=${0}&page=${1}",
+  "url": "https://www.royalroad.com/fictions/search?globalFilters=true&page=${1}",
   "type": "GET",
   "bodyType": "JSON",
   "waitForPageLoad": false,
@@ -47,9 +47,7 @@
           "element": ".row.stats>div>span",
           "getContent": true,
           "withHref": false,
-          "selectItemsAtIndex": [
-            4
-          ],
+          "selectItemsAtIndex": [4],
           "regex": {
             "regex": "^(\\d+)",
             "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
