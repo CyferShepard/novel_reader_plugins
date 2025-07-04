@@ -64,7 +64,8 @@
       "label": "lastPage",
       "element": ".paginator>a",
       "getContent": true,
-      "withHref": false
+      "withHref": false,
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n      return  parseInt(value[value.length-1]);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     }
   ]
 }
