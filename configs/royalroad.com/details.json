@@ -10,7 +10,8 @@
       "element": "meta[property=\"og:url\"]",
       "getContent": true,
       "withHref": false,
-      "dataProp": "content"
+      "dataProp": "content",
+      "finalTransformProcess": "(data) => data.replace('https://www.royalroad.com','')"
     },
     {
       "label": "cover",
