@@ -58,7 +58,7 @@
         "regex": "[?&]page=(\\d+)",
         "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
       },
-      "finalTransformProcess": "(value) => value.startsWith('https://novelbin') ?  1 : parseInt(value)"
+      "finalTransformProcess": "(value) => value && value.startsWith('https://novelbin') ?  1 : value? parseInt(value) : null"
     },
     {
       "label": "lastPage",
@@ -70,7 +70,7 @@
         "regex": "[?&]page=(\\d+)",
         "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
       },
-      "finalTransformProcess": "(value) => value.startsWith('https://novelbin') ?  1 : parseInt(value)"
+      "finalTransformProcess": "(value) => value && value.startsWith('https://novelbin') ?  1 : value? parseInt(value) : null"
     }
   ]
 }
