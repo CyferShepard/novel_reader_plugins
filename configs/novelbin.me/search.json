@@ -57,7 +57,8 @@
       "regex": {
         "regex": "[?&]page=(\\d+)",
         "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
-      }
+      },
+      "finalTransformProcess": "(value) => value.startsWith('https://novelbin') ?  1 : parseInt(value)"
     },
     {
       "label": "lastPage",
