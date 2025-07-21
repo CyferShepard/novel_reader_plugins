@@ -34,7 +34,7 @@
           "element": "img",
           "getContent": true,
           "withHref": true,
-          "transformProcess": "(value)=>{\n            if (value.startsWith(\"/\")) {\n              return \"https://novelbin.me\" + value.replace('/novel_200_89','/novel');\n            } else {\n              return value.replace('/novel_200_89','/novel');\n            }\n          }"
+          "transformProcess": "(value)=>{\n            if (typeof value === 'string' && value.startsWith(\"/\")) {\n              return \"https://novelbin.me\" + value.replace('/novel_200_89','/novel');\n            } else {\n              return value.replace('/novel_200_89','/novel');\n            }\n          }"
         },
         {
           "label": "genres",
