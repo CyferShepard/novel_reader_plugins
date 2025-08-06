@@ -25,7 +25,7 @@
     },
     {
       "label": "content",
-      "element": ".content-inner>div>p",
+      "element": ".content-inner p",
       "getContent": true,
       "withHref": false
     },
