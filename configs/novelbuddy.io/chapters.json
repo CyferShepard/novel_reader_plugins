@@ -19,11 +19,11 @@
         },
         {
           "label": "index",
-          "element": ".chapter-title",
-          "getContent": true,
-          "withHref": false,
+          "element": "a",
+          "getContent": false,
+          "withHref": true,
           "regex": {
-            "regex": "C\\.+(\\d+)",
+            "regex": "/chapter-(\\d+)",
             "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
           }
         },
