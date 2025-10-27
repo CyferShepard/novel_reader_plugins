@@ -37,31 +37,23 @@
       "withHref": false
     },
     {
-      "label": "author",
-      "element": ".detail>.meta.box>p>a>span",
+      "label": "authors",
+      "element": ".detail > .meta.box.mt-1.p-10 > p:nth-of-type(1) > a > span",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": [
-        0
-      ]
+      "withHref": false
     },
     {
       "label": "status",
-      "element": ".detail>.meta.box>p>a>span",
+      "element": ".detail > .meta.box.mt-1.p-10 > p:nth-of-type(2) > a > span",
       "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": [
-        1
-      ]
+      "withHref": false
     },
     {
       "label": "genres",
       "element": ".detail>.meta.box>p",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        2
-      ],
+      "selectItemsAtIndex": [2],
       "regex": {
         "regex": "^Genres :\\s*",
         "process": "(match)=>match?.input?.replace(match[0], \"\") ?? \"\""
@@ -72,18 +64,14 @@
       "element": ".detail>.meta.box>p>span",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        0
-      ]
+      "selectItemsAtIndex": [0]
     },
     {
       "label": "lastUpdate",
       "element": ".detail>.meta.box>p>span",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        1
-      ]
+      "selectItemsAtIndex": [1]
     },
     {
       "label": "additionalProps",
@@ -96,9 +84,7 @@
           "element": "script",
           "getContent": true,
           "withHref": false,
-          "selectItemsAtIndex": [
-            0
-          ],
+          "selectItemsAtIndex": [0],
           "regex": {
             "regex": "var bookId = (\\d+);",
             "process": "(match)=>match ? match[1] : null"

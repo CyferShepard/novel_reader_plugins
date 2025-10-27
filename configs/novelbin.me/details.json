@@ -23,9 +23,7 @@
       "element": ".title",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        0
-      ]
+      "selectItemsAtIndex": [0]
     },
     {
       "label": "summary",
@@ -44,35 +42,29 @@
       "element": ".info.info-meta>li>a",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        0
-      ]
+      "selectItemsAtIndex": [0]
     },
     {
       "label": "status",
-      "element": ".info.info-meta>li",
-      "getContent": true,
+      "element": ".info.info-meta > li",
+      "getContent": false,
       "withHref": false,
-      "selectItemsAtIndex": [
-        2
-      ],
       "regex": {
-        "regex": "Status:\\s*([^<]+)",
-        "process": "(match)=>match ? match[match.length - 1] : null"
-      }
+        "regex": "<h3>Status:</h3>\\s*<a[^>]*>([^<]+)</a>",
+        "process": "(match) => match ? match[1].trim() : null"
+      },
+      "finalTransformProcess": "(value) => value[0]"
     },
     {
       "label": "genres",
       "element": ".info.info-meta>li",
-      "getContent": true,
+      "getContent": false,
       "withHref": false,
-      "selectItemsAtIndex": [
-        1
-      ],
       "regex": {
-        "regex": "^Genre:\\s*",
-        "process": "(match)=>match?.input?.replace(match[0], \"\") ?? \"\""
-      }
+        "regex": "<h3>Genre:</h3>\\s*((?:<a[^>]*>[^<]+</a>,?\\s*)+)",
+        "process": "(match) => match ? match[1].replace(/<a[^>]*>([^<]+)<\\/a>/g, '$1').split(',').map(g => g.trim()) : []"
+      },
+      "finalTransformProcess": "(value) => { \nconst h3Index = value.findIndex(item => item.includes('<h3>')); \nreturn value.slice(0, h3Index === -1 ? value.length : h3Index); \n}"
     },
     {
       "label": "chapters",

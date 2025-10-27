@@ -10,9 +10,7 @@
       "element": ".cur.cur-1>.wp>a",
       "getContent": true,
       "withHref": true,
-      "selectItemsAtIndex": [
-        2
-      ]
+      "selectItemsAtIndex": [2]
     },
     {
       "label": "cover",
@@ -26,9 +24,7 @@
       "element": ".cur.cur-1>.wp>a",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        2
-      ]
+      "selectItemsAtIndex": [2]
     },
     {
       "label": "summary",
@@ -43,24 +39,20 @@
     },
     {
       "label": "author",
-      "element": ".m-imgtxt>.txt>.item>.right>.a1",
+      "element": "span[title=\"Author\"] + div > a",
       "getContent": true,
-      "withHref": false,
-      "dataProp": "",
-      "selectItemsAtIndex": [
-        0
-      ]
+      "withHref": false
     },
     {
       "label": "status",
-      "element": ".m-imgtxt>.txt>.item>.right>.s1.s2",
+      "element": "span[title=\"Status\"] + div > span> a",
       "getContent": true,
       "withHref": false
     },
     {
       "label": "genres",
-      "element": ".m-imgtxt>.txt>.item>.right>.a1",
-      "getContent": false,
+      "element": "span[title=\"Genre\"] + div > a",
+      "getContent": true,
       "withHref": false
     },
     {
