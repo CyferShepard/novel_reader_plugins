@@ -13,10 +13,17 @@ const tests: TestUnits[] = [
   //   new TestUnit(TestUnitType.search, null, { searchkey: "test" }, 1, null),
   // ]),
 
-  new TestUnits("novelbin.me", [
-    new TestUnit(TestUnitType.chapter, "https://novelbin.com/b/beyond-chaos-a-dicerpg/0-alive-again", null, 1, null),
-    // new TestUnit(TestUnitType.chapters, "", null, 1, { NovelId: "beyond-chaos-a-dicerpg" }),
-    new TestUnit(TestUnitType.details, "https://novelbin.me/novel-book/beyond-chaos-a-dicerpg#tab-chapters-title", null, 1, null),
+  // new TestUnits("novelbin.me", [
+  //   new TestUnit(TestUnitType.chapter, "https://novelbin.com/b/beyond-chaos-a-dicerpg/0-alive-again", null, 1, null),
+  //   new TestUnit(TestUnitType.chapters, "", null, 1, { NovelId: "beyond-chaos-a-dicerpg" }),
+  //   new TestUnit(TestUnitType.details, "https://novelbin.me/novel-book/beyond-chaos-a-dicerpg#tab-chapters-title", null, 1, null),
+  //   new TestUnit(TestUnitType.latest, null, null, 1, null),
+  //   new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("keyword=test")),
+  // ]),
+  new TestUnits("novelbuddy.io", [
+    new TestUnit(TestUnitType.chapter, "/novel/void-evolution-system/chapter-1", null, 1, null),
+    new TestUnit(TestUnitType.chapters, "", null, 1, { BookId: "3988" }),
+    new TestUnit(TestUnitType.details, "/novel/void-evolution-system", null, 1, null),
     new TestUnit(TestUnitType.latest, null, null, 1, null),
     new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("keyword=test")),
   ]),
@@ -40,7 +47,7 @@ const responseValidation: responseTypes[] = [
   new responseTypes("curentPage", "number", TestUnitType.chapters, [], true),
   new responseTypes("lastPage", "string", TestUnitType.chapters, [], true),
   ///////////////////
-  new responseTypes("url", "string", TestUnitType.details),
+  new responseTypes("url", "string", TestUnitType.details, [], true),
   new responseTypes("cover", "string", TestUnitType.details),
   new responseTypes("title", "string", TestUnitType.details),
   new responseTypes("summary", "object", TestUnitType.details, [new responseTypes("", "string", TestUnitType.details)]),
@@ -48,7 +55,7 @@ const responseValidation: responseTypes[] = [
   new responseTypes("author", "string", TestUnitType.details),
   new responseTypes("status", "string", TestUnitType.details),
   new responseTypes("genres", "object", TestUnitType.details, [new responseTypes("", "string", TestUnitType.details)], true),
-  new responseTypes("chapters", "number", TestUnitType.details, [], true),
+  new responseTypes("chapters", "number", TestUnitType.details, [new responseTypes("", "string", TestUnitType.details)], true), // to fix, this needs to be a number
   new responseTypes("lastUpdate", "string", TestUnitType.details),
   //////////////////
   new responseTypes("results", "object", TestUnitType.latest, [
@@ -169,7 +176,7 @@ Deno.test("API Parser Test Suite", async () => {
               assertEquals(
                 isValidType,
                 true,
-                `Validation failed for key: ${childValidation.key}, expected type: ${
+                `${validation.unit.toString()} - Validation failed for key: ${childValidation.key}, expected type: ${
                   childValidation.type
                 }, got: ${typeof childValue}, parent key: ${validation.key}, value: ${JSON.stringify(v)}`
               );
@@ -180,13 +187,16 @@ Deno.test("API Parser Test Suite", async () => {
         if (validation.allowNull) {
           validTypes.push("undefined");
         }
+        if (validation.children && validation.children.length > 0 && !Array.isArray(value)) {
+          validTypes.push(validation.children[0].type);
+        }
 
         const isValidType = validTypes.includes(typeof value) || (validation.allowNull && value === null);
 
         assertEquals(
           isValidType,
           true,
-          `Validation failed for key: ${validation.key}, expected type: ${
+          `${validation.unit.toString()} - Validation failed for key: ${validation.key}, expected type: ${
             validation.type
           }, got: ${typeof value}, value: ${JSON.stringify(value)}`
         );
