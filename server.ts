@@ -1,6 +1,6 @@
 import { Application, Router, send } from "https://deno.land/x/oak@v17.1.3/mod.ts";
 import "./classes/extensions.ts";
-import { parseQuery } from "./classes/api-parser.ts";
+import { parseQuery, ScraperResponse } from "./classes/api-parser.ts";
 import { ScraperPayload } from "../api-parser/mod.ts";
 const PORT = 8008;
 const router = new Router();
@@ -535,21 +535,21 @@ router.post("/parse", async (context) => {
   }
 
   await parseQuery(ScraperPayload.fromJson(payload)).then((response) => {
-    if (response) {
-      const responseBody = response.toJson();
-      if (
-        responseBody.results &&
-        Array.isArray(responseBody.results) &&
-        responseBody.results.length === 1 &&
-        Object.keys(responseBody.results[0]).length === 1 &&
-        Object.keys(responseBody.results[0])[0] === "results"
-      ) {
-        // Replace the "results" field with the value of the single JSON object
-        const singleResult = responseBody.results[0];
-        const firstKey = Object.keys(singleResult)[0];
-        responseBody.results = singleResult[firstKey];
-      }
-      console.log(responseBody);
+    if (response && response instanceof ScraperResponse) {
+      const responseBody = (response as ScraperResponse).toJson();
+      // if (
+      //   responseBody.results &&
+      //   Array.isArray(responseBody.results) &&
+      //   responseBody.results.length === 1 &&
+      //   Object.keys(responseBody.results[0]).length === 1 &&
+      //   Object.keys(responseBody.results[0])[0] === "results"
+      // ) {
+      //   // Replace the "results" field with the value of the single JSON object
+      //   const singleResult = responseBody.results[0];
+      //   const firstKey = Object.keys(singleResult)[0];
+      //   responseBody.results = singleResult[firstKey];
+      // }
+      // console.log(responseBody);
 
       context.response.body = responseBody;
     } else {
