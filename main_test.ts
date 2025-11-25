@@ -5,79 +5,98 @@ import { BodyType, parseQuery, ScraperPayload } from "../api-parser/mod.ts";
 import { responseTypes } from "./models/response-types.ts";
 
 const tests: TestUnits[] = [
-  // new TestUnits("freewebnovel.com", [
-  //   new TestUnit(TestUnitType.chapter, "/dual-cultivator-with-a-cultivation-system/chapter-1", null, 1, null),
-  //   new TestUnit(TestUnitType.chapters, "/novel/dual-cultivator-with-a-cultivation-system", null, 1, null),
-  //   new TestUnit(TestUnitType.details, "/novel/dual-cultivator-with-a-cultivation-system", null, 1, null),
-  //   new TestUnit(TestUnitType.latest, null, null, 1, null),
-  //   new TestUnit(TestUnitType.search, null, { searchkey: "test" }, 1, null),
-  // ]),
+  new TestUnits("freewebnovel.com", [
+    new TestUnit(TestUnitType.chapter, "/dual-cultivator-with-a-cultivation-system/chapter-1", null, 1, null),
+    new TestUnit(TestUnitType.chapters, "/novel/dual-cultivator-with-a-cultivation-system", null, 1, null),
+    new TestUnit(TestUnitType.details, "/novel/dual-cultivator-with-a-cultivation-system", null, 1, null),
+    new TestUnit(TestUnitType.latest, null, null, 1, null),
+    new TestUnit(TestUnitType.search, null, { searchkey: "test" }, 1, null),
+  ]),
 
-  // new TestUnits("novelbin.me", [
-  //   new TestUnit(TestUnitType.chapter, "https://novelbin.com/b/beyond-chaos-a-dicerpg/0-alive-again", null, 1, null),
-  //   new TestUnit(TestUnitType.chapters, "", null, 1, { NovelId: "beyond-chaos-a-dicerpg" }),
-  //   new TestUnit(TestUnitType.details, "https://novelbin.me/novel-book/beyond-chaos-a-dicerpg#tab-chapters-title", null, 1, null),
-  //   new TestUnit(TestUnitType.latest, null, null, 1, null),
-  //   new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("keyword=test")),
-  // ]),
+  new TestUnits("novelbin.me", [
+    new TestUnit(TestUnitType.chapter, "https://novelbin.com/b/beyond-chaos-a-dicerpg/0-alive-again", null, 1, null),
+    // new TestUnit(TestUnitType.chapters, "", null, 1, { NovelId: "beyond-chaos-a-dicerpg" }),
+    new TestUnit(TestUnitType.details, "https://novelbin.me/novel-book/beyond-chaos-a-dicerpg#tab-chapters-title", null, 1, null),
+    new TestUnit(TestUnitType.latest, null, null, 1, null),
+    new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("keyword=test")),
+  ]),
   new TestUnits("novelbuddy.io", [
     new TestUnit(TestUnitType.chapter, "/novel/void-evolution-system/chapter-1", null, 1, null),
     new TestUnit(TestUnitType.chapters, "", null, 1, { BookId: "3988" }),
     new TestUnit(TestUnitType.details, "/novel/void-evolution-system", null, 1, null),
     new TestUnit(TestUnitType.latest, null, null, 1, null),
-    new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("keyword=test")),
+    new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("q=test")),
   ]),
 ];
 
 const responseValidation: responseTypes[] = [
-  new responseTypes("novelTitle", "string", TestUnitType.chapter),
-  new responseTypes("novelUrl", "string", TestUnitType.chapter),
-  new responseTypes("title", "string", TestUnitType.chapter),
-  new responseTypes("content", "object", TestUnitType.chapter, [new responseTypes("", "string", TestUnitType.chapter)]),
-  new responseTypes("previousPage", "string", TestUnitType.chapter, [], true),
-  new responseTypes("nextPage", "string", TestUnitType.chapter),
   new responseTypes("url", "string", TestUnitType.chapter),
+  new responseTypes("results", "object", TestUnitType.chapter, [
+    new responseTypes("novelTitle", "string", TestUnitType.chapter),
+    new responseTypes("novelUrl", "string", TestUnitType.chapter),
+    new responseTypes("title", "string", TestUnitType.chapter),
+    new responseTypes("content", "object", TestUnitType.chapter, [new responseTypes("", "string", TestUnitType.chapter)]),
+    new responseTypes("previousPage", "string", TestUnitType.chapter, [], true),
+    new responseTypes("nextPage", "string", TestUnitType.chapter),
+    new responseTypes("url", "string", TestUnitType.chapter),
+  ]),
+
   ////////////////////
-  new responseTypes("chapters", "object", TestUnitType.chapters, [
-    new responseTypes("url", "string", TestUnitType.chapters),
-    new responseTypes("index", "number", TestUnitType.chapters),
-    new responseTypes("title", "string", TestUnitType.chapters),
-    new responseTypes("date", "string", TestUnitType.chapters, [], true),
+  new responseTypes("url", "string", TestUnitType.chapters),
+  new responseTypes("results", "object", TestUnitType.chapters, [
+    new responseTypes("chapters", "object", TestUnitType.chapters, [
+      new responseTypes("url", "string", TestUnitType.chapters),
+      new responseTypes("index", "number", TestUnitType.chapters),
+      new responseTypes("title", "string", TestUnitType.chapters),
+      new responseTypes("date", "string", TestUnitType.chapters, [], true),
+    ]),
+    new responseTypes("curentPage", "number", TestUnitType.chapters, [], true),
+    new responseTypes("lastPage", "string", TestUnitType.chapters, [], true),
   ]),
-  new responseTypes("curentPage", "number", TestUnitType.chapters, [], true),
-  new responseTypes("lastPage", "string", TestUnitType.chapters, [], true),
+
   ///////////////////
-  new responseTypes("url", "string", TestUnitType.details, [], true),
-  new responseTypes("cover", "string", TestUnitType.details),
-  new responseTypes("title", "string", TestUnitType.details),
-  new responseTypes("summary", "object", TestUnitType.details, [new responseTypes("", "string", TestUnitType.details)]),
-  new responseTypes("tags", "object", TestUnitType.details, [new responseTypes("", "string", TestUnitType.details)], true),
-  new responseTypes("author", "string", TestUnitType.details),
-  new responseTypes("status", "string", TestUnitType.details),
-  new responseTypes("genres", "object", TestUnitType.details, [new responseTypes("", "string", TestUnitType.details)], true),
-  new responseTypes("chapters", "number", TestUnitType.details, [new responseTypes("", "string", TestUnitType.details)], true), // to fix, this needs to be a number
-  new responseTypes("lastUpdate", "string", TestUnitType.details),
+  new responseTypes("url", "string", TestUnitType.details),
+  new responseTypes("results", "object", TestUnitType.details, [
+    new responseTypes("url", "string", TestUnitType.details, [], true),
+    new responseTypes("cover", "string", TestUnitType.details),
+    new responseTypes("title", "string", TestUnitType.details),
+    new responseTypes("summary", "object", TestUnitType.details, [new responseTypes("", "string", TestUnitType.details)]),
+    new responseTypes("tags", "object", TestUnitType.details, [new responseTypes("", "string", TestUnitType.details)], true),
+    new responseTypes("author", "string", TestUnitType.details),
+    new responseTypes("status", "string", TestUnitType.details),
+    new responseTypes("genres", "object", TestUnitType.details, [new responseTypes("", "string", TestUnitType.details)], true),
+    new responseTypes("chapters", "number", TestUnitType.details, [new responseTypes("", "string", TestUnitType.details)], true), // to fix, this needs to be a number
+    new responseTypes("lastUpdate", "string", TestUnitType.details),
+  ]),
+
   //////////////////
+  new responseTypes("url", "string", TestUnitType.latest),
   new responseTypes("results", "object", TestUnitType.latest, [
-    new responseTypes("url", "string", TestUnitType.latest),
-    new responseTypes("title", "string", TestUnitType.latest),
-    new responseTypes("summary", "object", TestUnitType.latest, [new responseTypes("", "string", TestUnitType.latest)], true),
-    new responseTypes("cover", "string", TestUnitType.latest),
-    new responseTypes("genres", "object", TestUnitType.latest, [new responseTypes("", "string", TestUnitType.latest)], true),
+    new responseTypes("results", "object", TestUnitType.latest, [
+      new responseTypes("url", "string", TestUnitType.latest),
+      new responseTypes("title", "string", TestUnitType.latest),
+      new responseTypes("summary", "object", TestUnitType.latest, [new responseTypes("", "string", TestUnitType.latest)], true),
+      new responseTypes("cover", "string", TestUnitType.latest),
+      new responseTypes("genres", "object", TestUnitType.latest, [new responseTypes("", "string", TestUnitType.latest)], true),
+    ]),
+    new responseTypes("curentPage", "number", TestUnitType.latest, [], true),
+    new responseTypes("lastPage", "number", TestUnitType.latest, [], true),
   ]),
-  new responseTypes("curentPage", "number", TestUnitType.latest, [], true),
-  new responseTypes("lastPage", "number", TestUnitType.latest, [], true),
+
   //////////////////
+  new responseTypes("url", "string", TestUnitType.search),
   new responseTypes("results", "object", TestUnitType.search, [
-    new responseTypes("url", "string", TestUnitType.search),
-    new responseTypes("title", "string", TestUnitType.search),
-    new responseTypes("summary", "object", TestUnitType.search, [new responseTypes("", "string", TestUnitType.search)], true),
-    new responseTypes("cover", "string", TestUnitType.search),
-    new responseTypes("genres", "object", TestUnitType.search, [new responseTypes("", "string", TestUnitType.search)]),
-    new responseTypes("chapterCount", "number", TestUnitType.search),
+    new responseTypes("results", "object", TestUnitType.search, [
+      new responseTypes("url", "string", TestUnitType.search),
+      new responseTypes("title", "string", TestUnitType.search),
+      new responseTypes("summary", "object", TestUnitType.search, [new responseTypes("", "string", TestUnitType.search)], true),
+      new responseTypes("cover", "string", TestUnitType.search),
+      new responseTypes("genres", "object", TestUnitType.search, [new responseTypes("", "string", TestUnitType.search)]),
+      new responseTypes("chapterCount", "number", TestUnitType.search, [], true),
+    ]),
+    new responseTypes("curentPage", "number", TestUnitType.latest, [], true),
+    new responseTypes("lastPage", "number", TestUnitType.latest, [], true),
   ]),
-  new responseTypes("curentPage", "number", TestUnitType.search, [], true),
-  new responseTypes("lastPage", "number", TestUnitType.search, [], true),
 ];
 
 async function getPayload(source: string, payload: string) {
@@ -143,8 +162,39 @@ async function parse(source: string, testUnit: TestUnit) {
       const firstKey = Object.keys(singleResult)[0];
       responseBody.results = singleResult[firstKey];
     }
+
     return responseBody;
   });
+}
+
+function validate(validation: responseTypes, result: Record<string, any>, test: TestUnits) {
+  const value = validation.key == "" ? result : result[validation.key];
+  if (validation.children && validation.children.length > 0 && Array.isArray(value)) {
+    // Validate children types
+    for (const v of value) {
+      for (const childValidation of validation.children) {
+        validate(childValidation, v, test);
+      }
+    }
+  }
+
+  const validTypes = [validation.type];
+  if (validation.allowNull) {
+    validTypes.push("undefined");
+  }
+  if (validation.children && validation.children.length > 0 && !Array.isArray(value)) {
+    validTypes.push(validation.children[0].type);
+  }
+
+  const isValidType = validTypes.includes(typeof value) || (validation.allowNull && value === null);
+
+  assertEquals(
+    isValidType,
+    true,
+    `${test.source} - ${TestUnitType[validation.unit]} - Validation failed for key: ${validation.key}, expected type: ${
+      validation.type
+    }, got: ${typeof value}, value: ${JSON.stringify(value)}`
+  );
 }
 
 Deno.test("API Parser Test Suite", async () => {
@@ -154,52 +204,10 @@ Deno.test("API Parser Test Suite", async () => {
       const parsedResponse = await parse(testUnit.source, test);
       assertEquals(Array.isArray(parsedResponse.results), true, "Parsed response should be an array");
       assertEquals((parsedResponse.results as []).length > 0, true, "Parsed response array should not be empty");
-
+      console.log(`Parsed Response: ${JSON.stringify(parsedResponse, null, 2)}`);
       const resultTypeValidations = responseValidation.filter((resp) => resp.unit === test.type);
       for (const validation of resultTypeValidations) {
-        const result: Record<string, any> =
-          validation.unit == TestUnitType.search ? parsedResponse : (parsedResponse as Record<string, any>).results[0];
-        console.log(`Parsed Response: ${JSON.stringify(result, null, 2)}`);
-        const value = result[validation.key];
-        if (validation.children && validation.children.length > 0 && Array.isArray(value)) {
-          console.log(`Validating children for key: ${validation.key}`);
-          // Validate children types
-          for (const v of value) {
-            for (const childValidation of validation.children) {
-              const validTypes = [childValidation.type];
-              if (childValidation.allowNull) {
-                validTypes.push("undefined");
-              }
-              const childValue = childValidation.key == "" ? v : v[childValidation.key];
-              const isValidType = validTypes.includes(typeof childValue) || (childValidation.allowNull && childValue === null);
-
-              assertEquals(
-                isValidType,
-                true,
-                `${validation.unit.toString()} - Validation failed for key: ${childValidation.key}, expected type: ${
-                  childValidation.type
-                }, got: ${typeof childValue}, parent key: ${validation.key}, value: ${JSON.stringify(v)}`
-              );
-            }
-          }
-        }
-        const validTypes = [validation.type];
-        if (validation.allowNull) {
-          validTypes.push("undefined");
-        }
-        if (validation.children && validation.children.length > 0 && !Array.isArray(value)) {
-          validTypes.push(validation.children[0].type);
-        }
-
-        const isValidType = validTypes.includes(typeof value) || (validation.allowNull && value === null);
-
-        assertEquals(
-          isValidType,
-          true,
-          `${validation.unit.toString()} - Validation failed for key: ${validation.key}, expected type: ${
-            validation.type
-          }, got: ${typeof value}, value: ${JSON.stringify(value)}`
-        );
+        validate(validation, parsedResponse, testUnit);
       }
     }
   }
