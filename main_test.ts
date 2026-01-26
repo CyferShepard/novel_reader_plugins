@@ -5,46 +5,9 @@ import { BodyType, parseQuery, ScraperPayload } from "../api-parser/mod.ts";
 import { responseTypes } from "./models/response-types.ts";
 import { ScraperResponse } from "./classes/api-parser.ts";
 
-const tests: TestUnits[] = [
-  new TestUnits("freewebnovel.com", [
-    new TestUnit(TestUnitType.chapter, "/dual-cultivator-with-a-cultivation-system/chapter-1", null, 1, null),
-    new TestUnit(TestUnitType.chapters, "/novel/dual-cultivator-with-a-cultivation-system", null, 1, null),
-    new TestUnit(TestUnitType.details, "/novel/dual-cultivator-with-a-cultivation-system", null, 1, null),
-    new TestUnit(TestUnitType.latest, null, null, 1, null),
-    new TestUnit(TestUnitType.search, null, { searchkey: "test" }, 1, null),
-  ]),
+// `tests` moved to tests_def.ts so a generator can create static tests for VS Code discovery.
 
-  new TestUnits("novelbin.me", [
-    new TestUnit(TestUnitType.chapter, "https://novelbin.com/b/beyond-chaos-a-dicerpg/0-alive-again", null, 1, null),
-    new TestUnit(TestUnitType.chapters, "", null, 1, { NovelId: "beyond-chaos-a-dicerpg" }),
-    new TestUnit(TestUnitType.details, "https://novelbin.me/novel-book/beyond-chaos-a-dicerpg#tab-chapters-title", null, 1, null),
-    new TestUnit(TestUnitType.latest, null, null, 1, null),
-    new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("keyword=test")),
-  ]),
-  new TestUnits("novelbuddy.io", [
-    new TestUnit(TestUnitType.chapter, "/novel/void-evolution-system/chapter-1", null, 1, null),
-    new TestUnit(TestUnitType.chapters, "", null, 1, { BookId: "3988" }),
-    new TestUnit(TestUnitType.details, "/novel/void-evolution-system", null, 1, null),
-    new TestUnit(TestUnitType.latest, null, null, 1, null),
-    new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("q=test")),
-  ]),
-  new TestUnits("novgo.net", [
-    new TestUnit(TestUnitType.chapter, "/i-became-the-villains-lost-daughter/chapter-1.html", null, 1, null),
-    new TestUnit(TestUnitType.chapters, "/i-became-the-villains-lost-daughter.html", null, 1, null),
-    new TestUnit(TestUnitType.details, "/i-became-the-villains-lost-daughter.html", null, 1, null),
-    new TestUnit(TestUnitType.latest, null, null, 1, null),
-    new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("keyword=test")),
-  ]),
-  new TestUnits("royalroad.com", [
-    new TestUnit(TestUnitType.chapter, "/fiction/141420/aberration-earth/chapter/2792874/chapter-1-mereque-11", null, 1, null),
-    new TestUnit(TestUnitType.chapters, "/fiction/141420/aberration-earth", null, 1, null),
-    new TestUnit(TestUnitType.details, "/fiction/141420/aberration-earth", null, 1, null),
-    new TestUnit(TestUnitType.latest, null, null, 1, null),
-    new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("keyword=test")),
-  ]),
-];
-
-const responseValidation: responseTypes[] = [
+export const responseValidation: responseTypes[] = [
   new responseTypes("url", ["string"], TestUnitType.chapter),
   new responseTypes("results", ["object"], TestUnitType.chapter, [
     new responseTypes("novelTitle", ["string"], TestUnitType.chapter),
@@ -84,14 +47,14 @@ const responseValidation: responseTypes[] = [
       ["object"],
       TestUnitType.details,
       [new responseTypes("", ["string"], TestUnitType.details)],
-      true
+      true,
     ),
     new responseTypes(
       "chapters",
       ["number"],
       TestUnitType.details,
       [new responseTypes("", ["string"], TestUnitType.details)],
-      true
+      true,
     ),
     new responseTypes("lastUpdate", ["string"], TestUnitType.details, [], true),
   ]),
@@ -107,7 +70,7 @@ const responseValidation: responseTypes[] = [
         ["object"],
         TestUnitType.latest,
         [new responseTypes("", ["string"], TestUnitType.latest)],
-        true
+        true,
       ),
       new responseTypes("cover", ["string"], TestUnitType.latest),
       new responseTypes(
@@ -115,7 +78,7 @@ const responseValidation: responseTypes[] = [
         ["object"],
         TestUnitType.latest,
         [new responseTypes("", ["string"], TestUnitType.latest)],
-        true
+        true,
       ),
     ]),
     new responseTypes("curentPage", ["number"], TestUnitType.latest, [], true),
@@ -133,7 +96,7 @@ const responseValidation: responseTypes[] = [
         ["object"],
         TestUnitType.search,
         [new responseTypes("", ["string"], TestUnitType.search)],
-        true
+        true,
       ),
       new responseTypes("cover", ["string"], TestUnitType.search),
       new responseTypes(
@@ -141,7 +104,7 @@ const responseValidation: responseTypes[] = [
         ["object"],
         TestUnitType.search,
         [new responseTypes("", ["string"], TestUnitType.search)],
-        true
+        true,
       ),
       new responseTypes("chapterCount", ["number"], TestUnitType.search, [], true),
     ]),
@@ -161,7 +124,7 @@ async function getPayload(source: string, payload: string) {
   }
 }
 
-async function parse(source: string, testUnit: TestUnit) {
+export async function parse(source: string, testUnit: TestUnit) {
   const payload = await getPayload(source, TestUnitType[testUnit.type]);
   if (testUnit.testUrl && testUnit.type !== TestUnitType.search) {
     payload.url = payload.url.replace("${0}", testUnit.testUrl);
@@ -201,14 +164,14 @@ async function parse(source: string, testUnit: TestUnit) {
       assertEquals(
         false,
         true,
-        `Response is null for source: ${source}, test type: ${TestUnitType[testUnit.type]} - payload.url: ${payload.url}`
+        `Response is null for source: ${source}, test type: ${TestUnitType[testUnit.type]} - payload.url: ${payload.url}`,
       );
     }
     if (response instanceof ScraperResponse === false) {
       assertEquals(
         false,
         true,
-        `Response is not an instance of ScraperResponse for source: ${source}, test type: ${TestUnitType[testUnit.type]}`
+        `Response is not an instance of ScraperResponse for source: ${source}, test type: ${TestUnitType[testUnit.type]}`,
       );
     }
     const responseBody = (response as ScraperResponse).toJson();
@@ -216,8 +179,8 @@ async function parse(source: string, testUnit: TestUnit) {
   });
 }
 
-function validate(validation: responseTypes, result: Record<string, any>, test: TestUnits) {
-  const value = validation.key == "" ? result : result[validation.key];
+export function validate(validation: responseTypes, result: Record<string, unknown>, test: TestUnits) {
+  const value = validation.key == "" ? result : (result as Record<string, unknown>)[validation.key];
   if (validation.children && validation.children.length > 0 && Array.isArray(value)) {
     // Validate children types
     for (const v of value) {
@@ -242,22 +205,8 @@ function validate(validation: responseTypes, result: Record<string, any>, test: 
     true,
     `${test.source} - ${TestUnitType[validation.unit]} - Validation failed for key: ${validation.key}, expected type: ${
       validation.type
-    }, got: ${typeof value}, value: ${JSON.stringify(value)}`
+    }, got: ${typeof value}, value: ${JSON.stringify(value)}`,
   );
 }
 
-Deno.test("API Parser Test Suite", async () => {
-  for (const testUnit of tests) {
-    for (const test of testUnit.tests) {
-      console.log(`Running test for source: ${testUnit.source}, type: ${TestUnitType[test.type]}`);
-      const parsedResponse = await parse(testUnit.source, test);
-      assertEquals(Array.isArray(parsedResponse.results), true, "Parsed response should be an array");
-      assertEquals((parsedResponse.results as []).length > 0, true, "Parsed response array should not be empty");
-      console.log(`Parsed Response: ${JSON.stringify(parsedResponse, null, 2)}`);
-      const resultTypeValidations = responseValidation.filter((resp) => resp.unit === test.type);
-      for (const validation of resultTypeValidations) {
-        validate(validation, parsedResponse, testUnit);
-      }
-    }
-  }
-});
+// Tests are generated into `generated_tests.ts` for static discovery by VS Code.
