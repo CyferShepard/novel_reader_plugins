@@ -1,7 +1,8 @@
 import { assertEquals } from "@std/assert";
 import { TestUnitType, TestUnit } from "./models/test-unit.ts";
 import { TestUnits } from "./models/test-units.ts";
-import { parse, validate, responseValidation } from "./main_test.ts";
+import { parse, validate } from "./main_test.ts";
+import { responseValidation } from "./tests_def.ts";
 
 Deno.test("API Parser - freewebnovel.com - chapter - /dual-cultivator-with-a-cultivation-system/chapter-1 - page 1", async () => {
   const parsedResponse = await parse("freewebnovel.com", new TestUnit(TestUnitType.chapter, "/dual-cultivator-with-a-cultivation-system/chapter-1", null, 1, null, null));

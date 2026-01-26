@@ -1,4 +1,4 @@
-import { tests } from "../tests_def.ts";
+import { tests, responseValidation } from "../tests_def.ts";
 import { TestUnitType, TestUnit } from "../models/test-unit.ts";
 import { TestUnits } from "../models/test-units.ts";
 function serializeValue(v: unknown): string {
@@ -12,7 +12,8 @@ function serializeValue(v: unknown): string {
 let out = `import { assertEquals } from "@std/assert";
 import { TestUnitType, TestUnit } from "./models/test-unit.ts";
 import { TestUnits } from "./models/test-units.ts";
-import { parse, validate, responseValidation } from "./main_test.ts";
+import { parse, validate } from "./main_test.ts";
+import { responseValidation } from "./tests_def.ts";
 
 `;
 
