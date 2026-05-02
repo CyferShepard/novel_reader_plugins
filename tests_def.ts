@@ -19,9 +19,9 @@ export const tests: TestUnits[] = [
     new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("keyword=test")),
   ]),
   new TestUnits("novelbuddy.io", [
-    new TestUnit(TestUnitType.chapter, "/novel/void-evolution-system/chapter-1", null, 1, null),
-    new TestUnit(TestUnitType.chapters, "", null, 1, { BookId: "3988" }),
-    new TestUnit(TestUnitType.details, "/novel/void-evolution-system", null, 1, null),
+    new TestUnit(TestUnitType.chapter, "/void-evolution-system/chapter-1-earth", null, 1, null),
+    new TestUnit(TestUnitType.chapters, "", null, 1, { BookId: "M2z33G8A" }),
+    new TestUnit(TestUnitType.details, "/void-evolution-system", null, 1, null),
     new TestUnit(TestUnitType.latest, null, null, 1, null),
     new TestUnit(TestUnitType.search, null, null, 1, null, new URLSearchParams("q=test")),
   ]),

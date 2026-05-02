@@ -7,42 +7,41 @@
   "query": [
     {
       "label": "results",
-      "element": ".book-item",
+      "element": "div.flex.flex-col.h-full",
       "getContent": true,
       "withHref": false,
       "subQuery": [
         {
           "label": "url",
-          "element": ".meta>.title>h3>a",
+          "element": "a.absolute",
           "getContent": true,
           "withHref": true
         },
         {
           "label": "title",
-          "element": ".meta>.title>h3>a",
+          "element": "a.text-base-content",
           "getContent": true,
           "withHref": false
         },
         {
           "label": "summary",
-          "element": ".meta>.summary>p",
+          "element": "a.text-base-content",
           "getContent": true,
           "withHref": false
         },
         {
           "label": "cover",
-          "element": ".thumb>a>.lazy",
+          "element": "a.absolute>img",
           "getContent": true,
           "withHref": false,
-          "dataProp": "data-src",
+          "dataProp": "src",
           "regex": {
             "process": ""
-          },
-          "transformProcess": "(value)=>{\n            if (value.startsWith(\"//\")) {\n              return \"https:\"+ value;\n            } else {\n              return value;\n            }\n          }"
+          }
         },
         {
           "label": "genres",
-          "element": ".meta>.genres>span",
+          "element": "",
           "getContent": true,
           "withHref": false
         },
@@ -55,14 +54,14 @@
     },
     {
       "label": "currentPage",
-      "element": ".paginator>.active",
+      "element": "div> .btn-accent",
       "getContent": true,
       "withHref": false,
       "transformProcess": "(value) => (!isNaN(value) ? parseInt(value) : null)"
     },
     {
       "label": "lastPage",
-      "element": ".paginator>a",
+      "element": "div> .btn-md",
       "getContent": true,
       "withHref": false,
       "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n      return parseInt(value[value.length - 1]);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"

@@ -7,46 +7,48 @@
   "query": [
     {
       "label": "novelTitle",
-      "element": ".chapter-info>h2>a",
+      "element": ".comic-detail>h1",
       "getContent": true,
       "withHref": false
     },
     {
       "label": "novelUrl",
-      "element": ".chapter-info>h2>a",
+      "element": ".comic-detail>h1>a",
       "getContent": true,
       "withHref": true
     },
     {
       "label": "title",
-      "element": "#chapter__content>h1",
+      "element": ".comic-detail>h2>a>span",
       "getContent": true,
       "withHref": false
     },
     {
       "label": "content",
-      "element": ".content-inner p",
+      "element": ".novel-tts-content p",
       "getContent": true,
       "withHref": false
     },
     {
       "label": "previousPage",
-      "element": "#btn-prev",
+      "element": "div.flex.justify-center.gap-2 a:first-child[href*=\"/chapter-\"]",
       "getContent": true,
       "withHref": true
     },
     {
       "label": "nextPage",
-      "element": "#btn-next",
-      "getContent": true,
+      "element": "div.flex.justify-center.gap-2 a:last-child[href*=\"/chapter-\"]",
+      "getContent": false,
       "withHref": true
     },
     {
       "label": "url",
-      "element": ".container>.section.box>h2>a",
+      "element": ".comic-detail>h2>a",
       "getContent": false,
       "withHref": true,
-      "transformProcess": "(value)=>{\n            if (value.startsWith(\"/chap-preview\")) {\n              return value.replace(\"/chap-preview\",\"/novel\");\n            } else {\n              return value;\n            }\n          }"
+      "regex": {
+        "process": ""
+      }
     }
   ]
 }

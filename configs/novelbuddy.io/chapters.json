@@ -1,5 +1,5 @@
 {
-  "url": "https://novelbuddy.io/api/manga/${BookId}/chapters?source=detail",
+  "url": " https://api.novelbuddy.io/titles/${BookId}/chapters",
   "type": "GET",
   "bodyType": "JSON",
   "waitForPageLoad": false,
@@ -7,36 +7,33 @@
   "query": [
     {
       "label": "chapters",
-      "element": "li",
+      "element": "data.chapters",
       "getContent": true,
       "withHref": false,
       "subQuery": [
         {
           "label": "url",
-          "element": "a",
+          "element": "url",
           "getContent": true,
           "withHref": true
         },
         {
           "label": "index",
-          "element": "use-parent",
+          "element": "slug",
           "getContent": true,
           "withHref": false,
-          "dataProp": "id",
-          "regex": {
-            "regex": "c-(\\d+)",
-            "process": "(match)=>match && match.length >= 2 ? parseInt(match[1]) : null"
-          }
+          "dataProp": "",
+          "transformProcess": "(value) => {\n  if (value) {\n    try {\n      const match = value.match(/^chapter-(\\d+)/);\n\n      if (match) {\n       const chapterNum = match[1]; \n       return  parseInt(chapterNum);\n      } else {\n        return null;;\n      }\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
         },
         {
           "label": "title",
-          "element": ".chapter-title",
+          "element": "name",
           "getContent": true,
           "withHref": false
         },
         {
           "label": "date",
-          "element": ".chapter-update",
+          "element": "updated_at",
           "getContent": true,
           "withHref": false
         }
@@ -44,11 +41,13 @@
     },
     {
       "label": "curentPage",
+      "element": "null",
       "getContent": true,
       "withHref": false
     },
     {
       "label": "lastPage",
+      "element": "null",
       "getContent": true,
       "withHref": false
     }

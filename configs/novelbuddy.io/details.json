@@ -12,91 +12,89 @@
     },
     {
       "label": "cover",
-      "element": ".cover>.img-cover>img",
+      "element": ".manga-details-content>div>div>a>img",
       "getContent": true,
       "withHref": false,
-      "dataProp": "data-src",
-      "transformProcess": "(value)=>{\n            if (value.startsWith(\"//\")) {\n              return \"https:\"+ value;\n            } else {\n              return value;\n            }\n          }"
-    },
-    {
-      "label": "title",
-      "element": ".detail>.name.box>h1",
-      "getContent": true,
-      "withHref": false
-    },
-    {
-      "label": "summary",
-      "element": ".summary>p",
-      "getContent": true,
-      "withHref": false
-    },
-    {
-      "label": "tags",
-      "element": ".tags>a",
-      "getContent": true,
-      "withHref": false
-    },
-    {
-      "label": "author",
-      "element": ".detail > .meta.box.mt-1.p-10 > p:nth-of-type(1) > a > span",
-      "getContent": true,
-      "withHref": false
-    },
-    {
-      "label": "status",
-      "element": ".detail > .meta.box.mt-1.p-10 > p:nth-of-type(2) > a > span",
-      "getContent": true,
-      "withHref": false
-    },
-    {
-      "label": "genres",
-      "element": ".detail>.meta.box>p",
-      "getContent": true,
-      "withHref": false,
-      "selectItemsAtIndex": [
-        2
-      ],
-      "regex": {
-        "regex": "^Genres :\\s*",
-        "process": "(match)=>match?.input?.replace(match[0], \"\") ?? \"\""
-      }
-    },
-    {
-      "label": "chapters",
-      "element": ".detail>.meta.box>p>span",
-      "getContent": true,
-      "withHref": false,
+      "dataProp": "src",
       "selectItemsAtIndex": [
         0
       ]
     },
     {
-      "label": "lastUpdate",
-      "element": ".detail>.meta.box>p>span",
+      "label": "title",
+      "element": ".manga-details-content>div>div>a>img",
       "getContent": true,
       "withHref": false,
+      "dataProp": "alt",
       "selectItemsAtIndex": [
-        1
+        0
       ]
     },
     {
+      "label": "summary",
+      "element": "[class^=\"MangaDetails_descriptionWrapper\"]",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "tags",
+      "element": ".tag-item>span",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "author",
+      "element": "[class^=\"MangaDetails_mangaAuthors\"]",
+      "getContent": true,
+      "withHref": false
+    },
+    {
+      "label": "status",
+      "element": "[class^=\"MangaDetails_statItem\"]>span",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        3
+      ]
+    },
+    {
+      "label": "genres",
+      "element": "a[href^=\"/genres/\"]",
+      "getContent": true,
+      "withHref": false,
+      "regex": {
+        "regex": "",
+        "process": ""
+      }
+    },
+    {
+      "label": "chapters",
+      "element": "button[role=\"tab\"] [class*=\"MangaDetails_tabBadge\"]",
+      "getContent": true,
+      "withHref": false,
+      "selectItemsAtIndex": [
+        0
+      ],
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n     const cleanValue = value.replace(/,/g, \"\");\n      return  parseInt(cleanValue);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
+    },
+    {
+      "label": "lastUpdate",
+      "element": "div.opacity-70>span>span",
+      "getContent": true,
+      "withHref": false
+    },
+    {
       "label": "additionalProps",
-      "element": ".layout",
+      "element": "body",
       "getContent": true,
       "withHref": false,
       "subQuery": [
         {
           "label": "BookId",
-          "element": "script",
+          "element": "#__NEXT_DATA__",
           "getContent": true,
           "withHref": false,
-          "selectItemsAtIndex": [
-            0
-          ],
-          "regex": {
-            "regex": "var bookId = (\\d+);",
-            "process": "(match)=>match ? match[1] : null"
-          }
+          "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nconst bookId = data.props.pageProps.initialManga.id;\n      return bookId;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
         }
       ]
     }

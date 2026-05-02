@@ -1,5 +1,5 @@
 {
-  "url": "https://novelbuddy.io/search?page=${1}",
+  "url": "https://api.novelbuddy.io/titles/search?page=${1}",
   "type": "GET",
   "bodyType": "JSON",
   "waitForPageLoad": false,
@@ -7,31 +7,31 @@
   "query": [
     {
       "label": "results",
-      "element": ".book-item",
+      "element": "data.items",
       "getContent": true,
       "withHref": false,
       "subQuery": [
         {
           "label": "url",
-          "element": ".meta>.title>h3>a",
+          "element": "url",
           "getContent": true,
           "withHref": true
         },
         {
           "label": "title",
-          "element": ".meta>.title>h3>a",
+          "element": "name",
           "getContent": true,
           "withHref": false
         },
         {
           "label": "summary",
-          "element": ".meta>.summary>p",
+          "element": "alt_name",
           "getContent": true,
           "withHref": false
         },
         {
           "label": "cover",
-          "element": ".thumb>a>.lazy",
+          "element": "cover",
           "getContent": true,
           "withHref": false,
           "dataProp": "data-src",
@@ -42,12 +42,13 @@
         },
         {
           "label": "genres",
-          "element": ".meta>.genres>span",
+          "element": "",
           "getContent": true,
           "withHref": false
         },
         {
           "label": "chapterCount",
+          "element": "stats.chapters_count",
           "getContent": true,
           "withHref": false
         }
@@ -55,17 +56,16 @@
     },
     {
       "label": "currentPage",
-      "element": ".paginator>.active",
+      "element": "data.pagination.page",
       "getContent": true,
       "withHref": false,
       "transformProcess": "(value) => (!isNaN(value) ? parseInt(value) : null)"
     },
     {
       "label": "lastPage",
-      "element": ".paginator>a",
+      "element": "data.pagination.total_pages",
       "getContent": true,
-      "withHref": false,
-      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n      return  parseInt(value[value.length-1]);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
+      "withHref": false
     }
   ]
 }
