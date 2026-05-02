@@ -16,9 +16,7 @@
       "getContent": true,
       "withHref": false,
       "dataProp": "src",
-      "selectItemsAtIndex": [
-        0
-      ]
+      "selectItemsAtIndex": [0]
     },
     {
       "label": "title",
@@ -26,9 +24,7 @@
       "getContent": true,
       "withHref": false,
       "dataProp": "alt",
-      "selectItemsAtIndex": [
-        0
-      ]
+      "selectItemsAtIndex": [0]
     },
     {
       "label": "summary",
@@ -53,9 +49,7 @@
       "element": "[class^=\"MangaDetails_statItem\"]>span",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        3
-      ]
+      "selectItemsAtIndex": [3]
     },
     {
       "label": "genres",
@@ -72,10 +66,8 @@
       "element": "button[role=\"tab\"] [class*=\"MangaDetails_tabBadge\"]",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        0
-      ],
-      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n     const cleanValue = value.replace(/,/g, \"\");\n      return  parseInt(cleanValue);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
+      "selectItemsAtIndex": [0],
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n     const cleanValue = value.replace(/,/g, \"\");\n      return  cleanValue;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "lastUpdate",
