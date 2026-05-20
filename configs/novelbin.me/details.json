@@ -51,7 +51,7 @@
       "withHref": false,
       "regex": {
         "regex": "<h3>Status:</h3>\\s*<a[^>]*>([^<]+)</a>",
-        "process": "(match) => match ? match[1].trim() : null"
+        "process": "(match) => match ? match[1].replace(/<a[^>]*>([^<]+)<\\/a>/g, '$1').split(',').map(g => g.trim()) : []"
       },
       "finalTransformProcess": "(value) => value[0]"
     },
@@ -79,20 +79,21 @@
     },
     {
       "label": "additionalProps",
-      "element": "#tab-comment",
-      "getContent": true,
+      "element": "head",
+      "getContent": false,
       "withHref": false,
       "subQuery": [
         {
           "label": "NovelId",
-          "element": "script",
-          "getContent": false,
+          "element": "meta[property=\"og:url\"]",
+          "getContent": true,
           "withHref": false,
-          "dataProp": "",
+          "dataProp": "content",
           "regex": {
-            "regex": "const\\s+novelId\\s*=\\s*\"([^\"]+)\"",
-            "process": "(match)=>match ? match[1] : match"
-          }
+            "regex": "",
+            "process": ""
+          },
+          "finalTransformProcess": "(value) => value ? value.replace(\"https://novelbin.me/novel-book/\",\"\") : value;"
         }
       ]
     }
