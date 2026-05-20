@@ -7,21 +7,24 @@
   "query": [
     {
       "label": "novelTitle",
-      "element": ".comic-detail>h1",
-      "getContent": true,
-      "withHref": false
+      "element": "#__NEXT_DATA__",
+      "getContent": false,
+      "withHref": false,
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialManga.name;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "novelUrl",
-      "element": ".comic-detail>h1>a",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
-      "withHref": true
+      "withHref": false,
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialManga.url;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "title",
-      "element": ".comic-detail>h2>a>span",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
-      "withHref": false
+      "withHref": false,
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialChapter.name;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "content",
@@ -31,24 +34,28 @@
     },
     {
       "label": "previousPage",
-      "element": "div.flex.justify-center.gap-2 a:first-child[href*=\"/chapter-\"]",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
-      "withHref": true
+      "withHref": false,
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.previousChapter.url;\n    } catch (e) {\n      return \"\";\n    }\n  }\n  return \"\";\n}"
     },
     {
       "label": "nextPage",
-      "element": "div.flex.justify-center.gap-2 a:last-child[href*=\"/chapter-\"]",
-      "getContent": false,
-      "withHref": true
+      "element": "#__NEXT_DATA__",
+      "getContent": true,
+      "withHref": false,
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.nextChapter.url;\n    } catch (e) {\n      return \"\";\n    }\n  }\n  return \"\";\n}"
     },
     {
       "label": "url",
-      "element": ".comic-detail>h2>a",
-      "getContent": false,
-      "withHref": true,
+      "element": "#__NEXT_DATA__",
+      "getContent": true,
+      "withHref": false,
+      "dataProp": "",
       "regex": {
         "process": ""
-      }
+      },
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialChapter.url;\n    } catch (e) {\n      return \"\";\n    }\n  }\n  return \"\";\n}"
     }
   ]
 }

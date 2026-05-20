@@ -74,7 +74,7 @@ export const responseValidation: responseTypes[] = [
     new responseTypes("title", ["string"], TestUnitType.details),
     new responseTypes("summary", ["object"], TestUnitType.details, [new responseTypes("", ["string"], TestUnitType.details)]),
     new responseTypes("tags", ["object"], TestUnitType.details, [new responseTypes("", ["string"], TestUnitType.details)], true),
-    new responseTypes("author", ["string"], TestUnitType.details),
+    new responseTypes("author", ["string", "object"], TestUnitType.details),
     new responseTypes("status", ["string"], TestUnitType.details),
     new responseTypes(
       "genres",

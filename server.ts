@@ -533,6 +533,7 @@ router.post("/parse", async (context) => {
     context.response.body = { error: "Payload is required" };
     return;
   }
+  // console.log(ScraperPayload.fromJson(payload));
 
   await parseQuery(ScraperPayload.fromJson(payload)).then((response) => {
     if (response && response instanceof ScraperResponse) {

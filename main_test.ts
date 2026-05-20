@@ -23,6 +23,9 @@ export async function parse(source: string, testUnit: TestUnit) {
   if (testUnit.testUrl && testUnit.type !== TestUnitType.search) {
     payload.url = payload.url.replace("${0}", testUnit.testUrl);
   }
+  if (testUnit.type == TestUnitType.latest) {
+    payload.url = payload.url.replace("${0}", testUnit.page!.toString());
+  }
 
   if (testUnit.type == TestUnitType.search) {
     console.log("Search Test Body:", testUnit.testBody);

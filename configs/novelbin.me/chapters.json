@@ -7,19 +7,22 @@
   "query": [
     {
       "label": "chapters",
-      "element": "ul.list-chapter>li",
+      "element": "[data-chapter-item-template]",
+      "subElements": ["li"],
       "getContent": true,
       "withHref": false,
       "subQuery": [
         {
           "label": "url",
           "element": "a",
+          "subElements": [],
           "getContent": true,
           "withHref": true
         },
         {
           "label": "index",
           "element": "a",
+          "subElements": [],
           "getContent": true,
           "withHref": false,
           "dataProp": "title",
@@ -31,12 +34,14 @@
         {
           "label": "title",
           "element": "a",
+          "subElements": [],
           "getContent": true,
           "withHref": false,
           "dataProp": "title"
         },
         {
           "label": "date",
+          "subElements": [],
           "getContent": true,
           "withHref": false
         }
@@ -45,6 +50,7 @@
     {
       "label": "curentPage",
       "element": "",
+      "subElements": [],
       "getContent": true,
       "withHref": false,
       "dataProp": ""
@@ -52,6 +58,7 @@
     {
       "label": "lastPage",
       "element": "",
+      "subElements": [],
       "getContent": true,
       "withHref": false,
       "dataProp": ""
