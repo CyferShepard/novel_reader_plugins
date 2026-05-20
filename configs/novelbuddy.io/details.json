@@ -12,76 +12,72 @@
     },
     {
       "label": "cover",
-      "element": ".manga-details-content>div>div>a>img",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
       "withHref": false,
-      "dataProp": "src",
-      "selectItemsAtIndex": [
-        0
-      ]
+      "dataProp": "",
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialManga.cover;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "title",
-      "element": ".manga-details-content>div>div>a>img",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
       "withHref": false,
-      "dataProp": "alt",
-      "selectItemsAtIndex": [
-        0
-      ]
+      "dataProp": "",
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialManga.name;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "summary",
-      "element": "[class^=\"MangaDetails_descriptionWrapper\"]",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
-      "withHref": false
+      "withHref": false,
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialManga.summary;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "tags",
-      "element": ".tag-item>span",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
-      "withHref": false
+      "withHref": false,
+      "transformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialManga.tags.map((t) =>t.name);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "author",
-      "element": "[class^=\"MangaDetails_mangaAuthors\"]",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
-      "withHref": false
+      "withHref": false,
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialManga.authors.map((a)=>a.name);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "status",
-      "element": "[class^=\"MangaDetails_statItem\"]>span",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        3
-      ]
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialManga.status;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "genres",
-      "element": "a[href^=\"/genres/\"]",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
       "withHref": false,
       "regex": {
         "regex": "",
         "process": ""
-      }
+      },
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialManga.genres.map((g)=>g.name);\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "chapters",
-      "element": "button[role=\"tab\"] [class*=\"MangaDetails_tabBadge\"]",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
       "withHref": false,
-      "selectItemsAtIndex": [
-        0
-      ],
-      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n     const cleanValue = value.replace(/,/g, \"\");\n      return  cleanValue;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialManga.stats.chaptersCount;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "lastUpdate",
-      "element": "[class^=\"MangaDetails_statsArea\"] .items-center span span",
+      "element": "#__NEXT_DATA__",
       "getContent": true,
-      "withHref": false
+      "withHref": false,
+      "finalTransformProcess": "(value) => {\n  if (value) {\n    try {\n    const data = JSON.parse(value);\nreturn data.props.pageProps.initialManga.updatedAt;\n    } catch (e) {\n      return null;\n    }\n  }\n  return null;\n}"
     },
     {
       "label": "additionalProps",
