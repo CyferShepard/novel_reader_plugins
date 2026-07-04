@@ -1,5 +1,5 @@
 import { DOMParser } from "https://deno.land/x/web_scraper_api@v1.0.13/deps.ts";
-import { Chapter } from "../../models/Chapter.ts";
+import { Chapter, ChapterUrlPagination } from "../../models/Chapter.ts";
 import { ChapterListItem, Chapters } from "../../models/Chapters.ts";
 import { Details } from "../../models/Details.ts";
 import { ParserBase } from "../../models/iParser.ts";
@@ -59,7 +59,7 @@ export class Main extends ParserBase {
       if (chapterCountElement) {
         const match = chapterCountElement.textContent?.trim().match(chRegex);
         if (match && match[1]) {
-          chapterCount = parseInt(match[1], 10);
+          chapterCount = this.parseInteger(match[1]);
         }
       }
 
@@ -86,13 +86,13 @@ export class Main extends ParserBase {
     const currentPageElement = doc.querySelector(".pages>ul>li>strong");
     let currentPage = 1;
     if (currentPageElement) {
-      currentPage = parseInt(currentPageElement.textContent?.trim() || "1", 10);
+      currentPage = this.parseInteger(currentPageElement.textContent?.trim(), 1);
     }
 
     const lastPageElement = doc.querySelector(".pages>ul>li>a");
     let lastPage = 1;
     if (lastPageElement) {
-      lastPage = parseInt(lastPageElement.textContent?.trim() || "1", 10);
+      lastPage = this.parseInteger(lastPageElement.textContent?.trim(), 1);
     }
 
     return new SearchResults(searchResults, currentPage, lastPage);
@@ -128,7 +128,7 @@ export class Main extends ParserBase {
       if (chapterCountElement) {
         const match = chapterCountElement.textContent?.trim().match(chRegex);
         if (match && match[1]) {
-          chapterCount = parseInt(match[1], 10);
+          chapterCount = this.parseInteger(match[1]);
         }
       }
 
@@ -155,22 +155,25 @@ export class Main extends ParserBase {
     const currentPageElement = doc.querySelector(".pages>ul>li>strong");
     let currentPage = 1;
     if (currentPageElement) {
-      currentPage = parseInt(currentPageElement.textContent?.trim() || "1", 10);
+      currentPage = this.parseInteger(currentPageElement.textContent?.trim(), 1);
     }
 
     const lastPageElement = doc.querySelector(".pages>ul>li>a");
     let lastPage = 1;
     if (lastPageElement) {
-      lastPage = parseInt(lastPageElement.textContent?.trim() || "1", 10);
+      lastPage = this.parseInteger(lastPageElement.textContent?.trim(), 1);
     }
 
     return new SearchResults(searchResults, currentPage, lastPage);
   }
 
-  async getNovel(url: string): Promise<Details | null> {
-    const res = await fetch(`https://freewebnovel.com${url}`);
+  async getNovel(url: string, additionalProps?: Record<string, string>): Promise<Details | null> {
+    const res = await fetch(`https://freewebnovel.com${url}`).catch((err) => {
+      console.error(`Failed to fetch novel details for ${url}:`, err);
+      return null;
+    });
 
-    if (!res.ok) {
+    if (!res?.ok) {
       return null;
     }
 
@@ -279,7 +282,7 @@ export class Main extends ParserBase {
       const indexMatch = cUrl.match(indexRegex);
       let index = 0;
       if (indexMatch && indexMatch[1]) {
-        index = parseInt(indexMatch[1], 10);
+        index = this.parseInteger(indexMatch[1]);
       }
 
       const chapterMeta = new ChapterListItem(this.source, cUrl, index, title, "", url);
@@ -290,7 +293,7 @@ export class Main extends ParserBase {
   }
 
   async getChapter(url: string, additionalProps?: Record<string, string>): Promise<Chapter> {
-    const res = await fetch(`https://freewebnovel.com${url}${this.parseAdditionalProps(additionalProps)}`);
+    const res = await fetch(`https://freewebnovel.com${url}`);
     if (!res.ok) {
       throw new Error(`Failed to fetch chapter: ${res.statusText}`);
     }
@@ -331,14 +334,17 @@ export class Main extends ParserBase {
       nextUrl = undefined;
     }
 
+    const nextPage = nextUrl ? new ChapterUrlPagination(nextUrl) : undefined;
+    const prevPage = prevUrl ? new ChapterUrlPagination(prevUrl) : undefined;
+
     return new Chapter(
       this.source,
       novelTitle,
       novelUrl,
       title,
       content,
-      prevUrl,
-      nextUrl,
+      prevPage,
+      nextPage,
       url,
       `https://freewebnovel.com${url}`,
     );
