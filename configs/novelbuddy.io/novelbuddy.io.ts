@@ -171,7 +171,6 @@ export class Main extends ParserBase {
 
       const slug = chapter.slug ?? "";
 
-      console.log(`Processing Slug: ${slug}`);
       const indexMatch = slug.match(/^chapter-(\d+)(?:-|$)/);
       let index = 0;
       if (indexMatch && indexMatch[1]) {
