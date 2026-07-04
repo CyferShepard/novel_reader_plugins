@@ -40,7 +40,10 @@ export class Main extends ParserBase {
 
       title = this.cleanUnicode(title);
 
-      const searchResult = new SearchResult(url, title, "", coverUrl, [], chapterCount, this.source);
+      const bookId = novel.id || "";
+      const searchResult = new SearchResult(url, title, "", coverUrl, [], chapterCount, this.source, {
+        BookId: bookId.toString(),
+      });
       searchResults.push(searchResult);
     }
 
@@ -73,7 +76,10 @@ export class Main extends ParserBase {
 
       title = this.cleanUnicode(title);
 
-      const searchResult = new SearchResult(url, title, "", coverUrl, [], chapterCount, this.source);
+      const bookId = novel.id || "";
+      const searchResult = new SearchResult(url, title, "", coverUrl, [], chapterCount, this.source, {
+        BookId: bookId.toString(),
+      });
       searchResults.push(searchResult);
     }
 
