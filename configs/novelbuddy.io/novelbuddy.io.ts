@@ -202,7 +202,26 @@ export class Main extends ParserBase {
     const novelUrl = json.data?.title?.url || "";
 
     const title = chapterData?.name;
-    const content = chapterData?.content;
+    const contentRaw = chapterData?.content;
+    let content = contentRaw || "";
+
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(contentRaw, "text/html");
+      const contentElements = doc?.querySelectorAll("p");
+      const contentParts: string[] = [];
+
+      contentElements?.forEach((p) => {
+        const text = p.textContent?.trim();
+        if (text) {
+          contentParts.push(text);
+        }
+      });
+
+      content = contentParts.join("\n\n");
+    } catch (err) {
+      console.error(`Error processing chapter content for ${url}:`, err);
+    }
 
     const nextUrl = json.data?.next_chapter?.url || undefined;
     const nextCapterId = json.data?.next_chapter?.id || undefined;
