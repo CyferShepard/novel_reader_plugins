@@ -231,6 +231,7 @@ export class Main extends ParserBase {
       const raw_id = novelData.raw_id || "";
       const chapter_count = novelData.chapter_count || 0;
       const additionalProps: Record<string, string> = { id: raw_id.toString(), chapters: chapter_count.toString() };
+      const lastUpdate = novelData.updated_at || "";
 
       const detail: Details = new Details(
         this.source,
@@ -241,7 +242,7 @@ export class Main extends ParserBase {
         status,
         [],
         chapters.toString(),
-        "",
+        lastUpdate,
         additionalProps,
         [],
         coverUrl,
