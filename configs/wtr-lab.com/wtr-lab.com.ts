@@ -405,14 +405,14 @@ export class Main extends ParserBase {
     const nextPage =
       chapterIndex < chapters
         ? new ChapterUrlPagination(
-            `/en/novel/${seriesData.raw_id}/${seriesData.slug}/chapter/${chapterIndex + 1}?service=web`,
+            `/en/novel/${seriesData.raw_id}/${seriesData.slug}/chapter-${chapterIndex + 1}?service=web`,
             additionalProps,
           )
         : undefined;
     const prevPage =
       chapterIndex > 1
         ? new ChapterUrlPagination(
-            `/en/novel/${seriesData.raw_id}/${seriesData.slug}/chapter/${chapterIndex - 1}?service=web`,
+            `/en/novel/${seriesData.raw_id}/${seriesData.slug}/chapter-${chapterIndex - 1}?service=web`,
             additionalProps,
           )
         : undefined;
@@ -424,8 +424,8 @@ export class Main extends ParserBase {
       translatedbody.join("\n\n"), //content,
       prevPage, //prevPage,
       nextPage, //nextPage,
-      `/en/novel/${seriesData.raw_id}/${seriesData.slug}/chapter/${chapterIndex}?service=web`,
-      `https://wtr-lab.com/en/novel/${seriesData.raw_id}/${seriesData.slug}/chapter/${chapterIndex}?service=web`,
+      `/en/novel/${seriesData.raw_id}/${seriesData.slug}/chapter-${chapterIndex}?service=web`,
+      `https://wtr-lab.com/en/novel/${seriesData.raw_id}/${seriesData.slug}/chapter-${chapterIndex}?service=web`,
     );
   }
 
