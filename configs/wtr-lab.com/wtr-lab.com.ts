@@ -57,7 +57,16 @@ export class Main extends ParserBase {
 
           const additionalProps: Record<string, string> = { id: id, chapters: chapterCount };
 
-          return new SearchResult(url, title, summary, coverUrl, tags, chapterCount, this.source, additionalProps);
+          return new SearchResult(
+            url,
+            title,
+            this.cleanText(summary),
+            coverUrl,
+            tags,
+            chapterCount,
+            this.source,
+            additionalProps,
+          );
         });
 
         const currentPageHref = doc.querySelector('a[aria-current="page"]')?.getAttribute("href") || "";
@@ -131,7 +140,16 @@ export class Main extends ParserBase {
 
           const additionalProps: Record<string, string> = { id: id, chapters: chapterCount };
 
-          return new SearchResult(url, title, summary, coverUrl, tags, chapterCount, this.source, additionalProps);
+          return new SearchResult(
+            url,
+            title,
+            this.cleanText(summary),
+            coverUrl,
+            tags,
+            chapterCount,
+            this.source,
+            additionalProps,
+          );
         });
 
         const currentPageHref = doc.querySelector('a[aria-current="page"]')?.getAttribute("href") || "";
@@ -217,7 +235,7 @@ export class Main extends ParserBase {
       const detail: Details = new Details(
         this.source,
         title,
-        summary,
+        this.cleanText(summary),
         tags,
         author,
         status,
@@ -353,6 +371,10 @@ export class Main extends ParserBase {
 
     if (translationJson[0] && translationJson[0][0]) {
       translatedbody = translationJson[0];
+    }
+
+    for (let i = 0; i < translatedbody.length; i++) {
+      translatedbody[i] = this.cleanText(translatedbody[i]);
     }
 
     ////////////////////////////page context
