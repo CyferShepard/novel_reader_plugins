@@ -291,8 +291,8 @@ export class Main extends ParserBase {
       const chaptersData = data.chapters || [];
 
       for (const chapter of chaptersData) {
-        const title = chapter.title || "";
-        const cUrl = url + `/chapter-${chapter.order || 0}?service=web`; // Construct chapter URL based on order
+        const title = `Chapter ${chapter.order || 0}: ` + (chapter.title || "");
+        const cUrl = `${url}/chapter-${chapter.order || 0}?service=web`; // Construct chapter URL based on order
         const index = chapter.order || 0;
         const date = chapter.updated_at || "";
         const chapterMeta = new ChapterListItem(this.source, cUrl, index, title, date.toString(), url, additionalProps);
