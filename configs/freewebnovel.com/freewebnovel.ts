@@ -14,23 +14,7 @@ export class Main extends ParserBase {
   ];
 
   async search(query: string, page?: number): Promise<SearchResults> {
-    const formData = this.createFormData({
-      searchkey: query,
-      page: page || 1,
-    });
-    // const formData = this.createFormData({
-    //   page: page || 1,
-    // });
-
-    // const params = new URLSearchParams(query.startsWith("?") ? query.slice(1) : query);
-    // for (const [key, value] of params.entries()) {
-    //   formData.set(key, value);
-    // }
-
-    const res = await fetch("https://freewebnovel.com/search", {
-      method: "POST",
-      body: formData,
-    });
+    const res = await fetch(`https://freewebnovel.com/search?keyword=${query}&page=${page || 1}`);
 
     if (!res.ok) {
       throw new Error(`Failed to search novels: ${res.statusText}`);
@@ -46,7 +30,7 @@ export class Main extends ParserBase {
 
     for (const novel of novelResults) {
       const titleElement = novel.querySelector(".tit a");
-      const coverElement = novel.querySelector(".pic>a>img");
+      const coverElement = novel.querySelector(".pic>a>picture>img");
       const genresElements = novel.querySelectorAll(".txt>.desc>.item>.right>a");
       const chapterCountElement = novel.querySelector(".s1");
       let coverUrl = coverElement?.getAttribute("src") || "";
@@ -115,7 +99,7 @@ export class Main extends ParserBase {
 
     for (const novel of novelResults) {
       const titleElement = novel.querySelector(".tit a");
-      const coverElement = novel.querySelector(".pic>a>img");
+      const coverElement = novel.querySelector(".pic>a>picture>img");
       const genresElements = novel.querySelectorAll(".txt>.desc>.item>.right>a");
       const chapterCountElement = novel.querySelector(".s1");
       let coverUrl = coverElement?.getAttribute("src") || "";
@@ -184,7 +168,7 @@ export class Main extends ParserBase {
     const urlElements = doc.querySelectorAll(".cur.cur-1>.wp>a");
     const pageUrl = urlElements && urlElements.length > 0 ? urlElements[urlElements.length - 1]?.getAttribute("href") || "" : "";
 
-    const coverElement = doc.querySelector(".m-imgtxt>.pic>img");
+    const coverElement = doc.querySelector(".m-imgtxt>.pic>picture>img");
     let coverUrl = coverElement?.getAttribute("src") || "";
     if (coverUrl.startsWith("/files")) {
       coverUrl = "https://freewebnovel.com" + coverUrl;
