@@ -14,8 +14,10 @@ export class Main extends ParserBase {
     new SourceFilterField({ type: FilterType.Main(), fieldName: "Keyword", fieldVar: "q", isParameter: true }),
   ];
 
+  baseURL: string = "https://api.novelbuddy.me";
+
   async search(query: string, page?: number): Promise<SearchResults> {
-    const res = await fetch(`https://api.novelbuddy.io/titles/search?q=${encodeURIComponent(query)}&page=${page || 1}`);
+    const res = await fetch(`${this.baseURL}/titles/search?q=${encodeURIComponent(query)}&page=${page || 1}`);
 
     if (!res.ok) {
       throw new Error(`Failed to search novels: ${res.statusText}`);
@@ -51,7 +53,7 @@ export class Main extends ParserBase {
   }
 
   async getLatest(page?: number): Promise<SearchResults> {
-    const res = await fetch(`https://api.novelbuddy.io/titles/search?sort=latest&page=${page || 1}`);
+    const res = await fetch(`${this.baseURL}/titles/search?sort=latest&page=${page || 1}`);
 
     if (!res.ok) {
       throw new Error(`Failed to search novels: ${res.statusText}`);
@@ -87,7 +89,7 @@ export class Main extends ParserBase {
   }
 
   async getNovel(url: string, additionalProps?: Record<string, string>): Promise<Details | null> {
-    const res = await fetch(`https://api.novelbuddy.io/titles/${additionalProps?.BookId}`).catch((err) => {
+    const res = await fetch(`${this.baseURL}/titles/${additionalProps?.BookId}`).catch((err) => {
       console.error(`Failed to fetch novel details for ${url}:`, err);
       return null;
     });
@@ -149,7 +151,7 @@ export class Main extends ParserBase {
 
   async getChapters(url: string, page?: number, additionalProps?: Record<string, string>): Promise<Chapters> {
     console.log(`Fetching chapters for ${url} with additionalProps:`, additionalProps);
-    const res = await fetch(`https://api.novelbuddy.io/titles/${additionalProps?.BookId}/chapters`);
+    const res = await fetch(`${this.baseURL}/titles/${additionalProps?.BookId}/chapters`);
     if (!res.ok) {
       throw new Error(`Failed to fetch chapter list: ${res.statusText}`);
     }
@@ -191,7 +193,7 @@ export class Main extends ParserBase {
   }
 
   async getChapter(url: string, additionalProps?: Record<string, string>): Promise<Chapter> {
-    const res = await fetch(`https://api.novelbuddy.io/titles/${additionalProps?.BookId}/chapters/${additionalProps?.ChapterId}`);
+    const res = await fetch(`${this.baseURL}/titles/${additionalProps?.BookId}/chapters/${additionalProps?.ChapterId}`);
     if (!res.ok) {
       throw new Error(`Failed to fetch chapter: ${res.statusText}`);
     }
