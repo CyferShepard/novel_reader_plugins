@@ -15,7 +15,7 @@ export class Main extends ParserBase {
   ];
 
   async search(query: string, page?: number): Promise<SearchResults> {
-    const res = await fetch(`https://novgo.net/search?page=${page || 1}&keyword=${encodeURIComponent(query)}`);
+    const res = await this.fetchWithFallback(`https://novgo.net/search?page=${page || 1}&keyword=${encodeURIComponent(query)}`);
 
     if (!res.ok) {
       throw new Error(`Failed to search novels: ${res.statusText}`);
@@ -66,10 +66,10 @@ export class Main extends ParserBase {
   }
 
   async getLatest(page?: number): Promise<SearchResults> {
-    const res = await fetch(`https://novgo.net/latest-release-novel?page=${page || 1}`);
-
+    const targetUrl = `https://novgo.net/latest-release-novel?page=${page || 1}`;
+    const res = await this.fetchWithFallback(targetUrl);
     if (!res.ok) {
-      throw new Error(`Failed to search novels: ${res.statusText}`);
+      throw new Error(`Failed to get latest novels: ${res.statusText}`);
     }
     const html = await res.text();
     const parser = new DOMParser();
@@ -117,12 +117,15 @@ export class Main extends ParserBase {
   }
 
   async getNovel(url: string, additionalProps?: Record<string, string>): Promise<Details | null> {
-    const res = await fetch(`https://novgo.net${url}`).catch((err) => {
+    let res: Response;
+    try {
+      res = await this.fetchWithFallback(`https://novgo.net${url}`);
+    } catch (err) {
       console.error(`Failed to fetch novel details for ${url}:`, err);
       return null;
-    });
+    }
 
-    if (!res?.ok) {
+    if (!res.ok) {
       return null;
     }
 
@@ -208,7 +211,7 @@ export class Main extends ParserBase {
   }
 
   async getChapters(url: string, page?: number, additionalProps?: Record<string, string>): Promise<Chapters> {
-    const res = await fetch(`https://novgo.net${url}?page=${page}`);
+    const res = await this.fetchWithFallback(`https://novgo.net${url}?page=${page}`);
     if (!res.ok) {
       throw new Error(`Failed to fetch chapter list: ${res.statusText}`);
     }
@@ -250,7 +253,7 @@ export class Main extends ParserBase {
   }
 
   async getChapter(url: string, additionalProps?: Record<string, string>): Promise<Chapter> {
-    const res = await fetch(`https://novgo.net${url}`);
+    const res = await this.fetchWithFallback(`https://novgo.net${url}`);
     if (!res.ok) {
       throw new Error(`Failed to fetch chapter: ${res.statusText}`);
     }
